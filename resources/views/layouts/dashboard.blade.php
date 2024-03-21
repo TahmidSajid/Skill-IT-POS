@@ -284,7 +284,11 @@
         </div>
         <!-- main content start
         ================================================== -->
-        @yield('content')
+        <div class="page-wrapper">
+            <div class="content">
+                @yield('content')
+            </div>
+        </div>
         <!-- main content end
         ================================================== -->
 
@@ -308,6 +312,9 @@
     <script src="{{asset('assets')}}/js/script.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
     <script src="{{ asset('assets') }}/js/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="a0ab8ad93cdb647a28609877-|49" defer=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @yield('alert')
 </body>
 
 </html>

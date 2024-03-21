@@ -11,14 +11,14 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Login - Pos admin template</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets')}}/img/favicon.png">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets')}}/css/style.css">
 </head>
 
 <body class="account-page">
@@ -29,7 +29,7 @@
                 <div class="login-content">
                     <div class="login-userset">
                         <div class="login-logo">
-                            <img src="assets/img/logo.png" alt="img">
+                            <img src="{{asset('assets')}}/img/logo.png" alt="img">
                         </div>
                         <div class="login-userheading">
                             <h3>Sign In</h3>
@@ -41,7 +41,7 @@
                                 <label>Email</label>
                                 <div class="form-addons">
                                     <input type="text" placeholder="Enter your email address" name="email" value="{{ old('email') }}">
-                                    <img src="assets/img/icons/mail.svg" alt="img">
+                                    <img src="{{asset('assets')}}/img/icons/mail.svg" alt="img">
                                 </div>
                                 @error('email')
                                     <div class="text-danger" role="alert">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-login">
                                 <div class="alreadyuser">
-                                    <h4><a href="forgetpassword.html" class="hover-a">Forgot Password?</a></h4>
+                                    <h4><a href="{{ route('password.request') }}" class="hover-a">Forgot Password?</a></h4>
                                 </div>
                             </div>
                             <div class="form-login">
@@ -71,7 +71,7 @@
                             </div>
                         </form>
                         <div class="signinform text-center">
-                            <h4>Don’t have an account? <a href="signup.html" class="hover-a">Sign Up</a></h4>
+                            <h4>Don’t have an account? <a href="{{ route('register') }}" class="hover-a">Sign Up</a></h4>
                         </div>
                         <div class="form-setlogin">
                             <h4>Or sign up with</h4>
@@ -80,13 +80,13 @@
                             <ul>
                                 <li>
                                     <a href="javascript:void(0);">
-                                        <img src="assets/img/icons/google.png" class="me-2" alt="google">
+                                        <img src="{{asset('assets')}}/img/icons/google.png" class="me-2" alt="google">
                                         Sign Up using Google
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);">
-                                        <img src="assets/img/icons/facebook.png" class="me-2" alt="google">
+                                        <img src="{{asset('assets')}}/img/icons/facebook.png" class="me-2" alt="google">
                                         Sign Up using Facebook
                                     </a>
                                 </li>
@@ -95,21 +95,21 @@
                     </div>
                 </div>
                 <div class="login-img">
-                    <img src="assets/img/login.jpg" alt="img">
+                    <img src="{{asset('assets')}}/img/login.jpg" alt="img">
                 </div>
             </div>
         </div>
     </div>
 
 
-    <script src="assets/js/jquery-3.6.0.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery-3.6.0.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
 
-    <script src="assets/js/feather.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/feather.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
 
-    <script src="assets/js/script.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
-    <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+    <script src="{{asset('assets')}}/js/script.js" type="0bc096b46b1259e831246b09-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="0bc096b46b1259e831246b09-|49" defer=""></script>
 </body>
 
