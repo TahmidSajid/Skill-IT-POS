@@ -12,8 +12,11 @@
         <div class="col-lg-3">
             <livewire:pages.dashboard.name-change />
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <livewire:pages.dashboard.password-change />
+        </div>
+        <div class="col-lg-4">
+            <livewire:pages.dashboard.email-change />
         </div>
     </div>
 

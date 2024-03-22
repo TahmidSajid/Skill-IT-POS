@@ -20,7 +20,8 @@ class NameChange extends Component
             'name' => $this->name,
         ]);
         $this->dispatch('reloading');
-        notyf()->addSuccess('Your application has been received.');
+        notyf()->addSuccess('User name has been changed.');
+        $this->reset();
     }
     public function render()
     {

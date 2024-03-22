@@ -7,20 +7,24 @@
             <div class="form-group row">
                 <label class="col-form-label col-md-3">Old password</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control form-control-lg" placeholder="Enter your old password"
-                        wire:model="oldPassword">
+                    <input type="password"
+                        class="form-control form-control-lg @error('oldPassword') is-invalid @enderror @if (session('oldPass')) is-invalid @endif"
+                        placeholder="Enter your old password" wire:model="oldPassword">
                     <div>
                         @error('oldPassword')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
+                        @if (session('oldPass'))
+                            <p class="text-danger">{{ session('oldPass') }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-form-label col-md-3">Password</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control form-control-lg" placeholder="Enter your new password"
-                        wire:model="Password">
+                    <input type="password" class="form-control form-control-lg @error('Password') is-invalid @enderror"
+                        placeholder="Enter your new password" wire:model="Password">
                     <div>
                         @error('Password')
                             <p class="text-danger">{{ $message }}</p>
@@ -29,12 +33,13 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-form-label col-md-3">confirm Password</label>
+                <label class="col-form-label col-md-3">Confirm Password</label>
                 <div class="col-md-9">
-                    <input type="password" class="form-control form-control-lg" placeholder="Enter your confirm password"
-                        wire:model="password_confirmation">
+                    <input type="password"
+                        class="form-control form-control-lg @error('passwordConfirmation') is-invalid @enderror @if (session('conPass')) is-invalid @endif"
+                        placeholder="Enter your confirm password" wire:model="passwordConfirmation">
                     <div>
-                        @error('password_confirmation')
+                        @error('passwordConfirmation')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                         @if (session('conPass'))

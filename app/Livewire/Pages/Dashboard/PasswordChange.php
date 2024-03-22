@@ -17,21 +17,26 @@ class PasswordChange extends Component
     public $Password = '';
 
     #[Validate('required')]
-    public $password_confirmation = '';
+    public $passwordConfirmation = '';
     public function changePassword()
     {
         $this->validate();
         $userPassword = auth()->user()->password;
-        if (Hash::check($this->oldPassword, $userPassword) && ($this->Password === $this->password_confirmation)) {
-            User::where('id', auth()->user()->id)->update([
-                'password' => Hash::make($this->Password),
-            ]);
-            $this->dispatch('reloading');
-            notyf()->addSuccess('Your application has been received.');
-            $this->reset();
+        if (Hash::check($this->oldPassword, $userPassword)) {
+            if (($this->Password === $this->passwordConfirmation)) {
+                User::where('id', auth()->user()->id)->update([
+                    'password' => Hash::make($this->Password),
+                ]);
+                $this->dispatch('reloading');
+                notyf()->addSuccess('Password has been updated.');
+                $this->reset();
+            }
+            else{
+                session()->flash('conPass', 'Confirm password doesnot match.');
+            }
         }
         else{
-            session()->flash('conPass', 'Confirm password doesnot match.');
+            session()->flash('oldPass', 'Old password doesnot match.');
         }
 
     }
