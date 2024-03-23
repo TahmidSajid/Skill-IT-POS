@@ -18,11 +18,17 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.css">
 
     <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2/css/select2.min.css">
+
+    <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/all.min.css">
-
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
+    {{-- @stack('customeCSS') --}}
 </head>
 
 <body>
@@ -258,10 +264,20 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="active">
-                            <a href="index.html"><img src="{{ asset('assets') }}/img/icons/dashboard.svg"
+                        <li>
+                            <a href="{{ route('home') }}"><img src="{{ asset('assets') }}/img/icons/dashboard.svg"
                                     alt="img"><span>
                                     Dashboard</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('profile') }}"><img
+                                    src="{{ asset('assets') }}/img/icons/dashboard.svg" alt="img"><span>
+                                    Profile</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('courses') }}"><img
+                                    src="{{ asset('assets') }}/img/icons/dashboard.svg" alt="img"><span>
+                                    Courses</span> </a>
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><img src="{{ asset('assets') }}/img/icons/product.svg"
@@ -305,7 +321,11 @@
     <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
 
     <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/feather.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
 
+    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
     <script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
     <script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
 
@@ -314,7 +334,10 @@
         data-cf-settings="a0ab8ad93cdb647a28609877-|49" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
     @yield('alert')
+
+    @stack('customeJS')
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/change/name', [App\Http\Controllers\DashboardController::class, 'change_name'])->name('change_name');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'view'])->name('profile');
+Route::get('/courses', [App\Http\Controllers\CoursesController::class, 'courses'])->name('courses');
+// Route::post('/change/name', [App\Http\Controllers\DashboardController::class, 'change_name'])->name('change_name');
