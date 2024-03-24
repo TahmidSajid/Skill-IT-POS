@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/css/animate.css">
 
     <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2/css/select2.min.css">
-
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet" href="{{ asset('assets') }}/css/dataTables.bootstrap4.min.css">
 
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/fontawesome.min.css">
@@ -264,7 +263,7 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li>
+                        <li class="active">
                             <a href="{{ route('home') }}"><img src="{{ asset('assets') }}/img/icons/dashboard.svg"
                                     alt="img"><span>
                                     Dashboard</span> </a>
@@ -274,26 +273,14 @@
                                     src="{{ asset('assets') }}/img/icons/dashboard.svg" alt="img"><span>
                                     Profile</span> </a>
                         </li>
-                        <li>
-                            <a href="{{ route('courses') }}"><img
-                                    src="{{ asset('assets') }}/img/icons/dashboard.svg" alt="img"><span>
-                                    Courses</span> </a>
-                        </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><img src="{{ asset('assets') }}/img/icons/product.svg"
-                                    alt="img"><span> Product</span> <span class="menu-arrow"></span></a>
+                                    alt="img"><span> Course</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="productlist.html">Product List</a></li>
-                                <li><a href="addproduct.html">Add Product</a></li>
-                                <li><a href="categorylist.html">Category List</a></li>
-                                <li><a href="addcategory.html">Add Category</a></li>
-                                <li><a href="subcategorylist.html">Sub Category List</a></li>
-                                <li><a href="subaddcategory.html">Add Sub Category</a></li>
-                                <li><a href="brandlist.html">Brand List</a></li>
-                                <li><a href="addbrand.html">Add Brand</a></li>
-                                <li><a href="importproduct.html">Import Products</a></li>
-                                <li><a href="barcode.html">Print Barcode</a></li>
+                                <li><a href="{{ route('caterory') }}">Category</a></li>
+                                <li><a href="{{ route('courses') }}">Course</a></li>
                             </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -311,25 +298,26 @@
     </div>
 
 
-    <script src="{{asset('assets')}}/js/jquery-3.6.0.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/feather.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/feather.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/jquery.slimscroll.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
-    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
-    <script src="{{asset('assets')}}/js/feather.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
-    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
-    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
+    <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/js/feather.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="c6264fa0b0cd331ccb44c494-text/javascript"></script>
-    <script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
-    <script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+    <script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="text/javascript"></script>
+    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/script.js" type="a0ab8ad93cdb647a28609877-text/javascript"></script>
+
+    <script src="{{asset('assets')}}/js/script.js" type="text/javascript"></script>
     <script src="{{ asset('assets') }}/js/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="a0ab8ad93cdb647a28609877-|49" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
