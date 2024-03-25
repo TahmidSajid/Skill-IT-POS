@@ -27,7 +27,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
-    {{-- @stack('customeCSS') --}}
+    @stack('paginationCss')
 </head>
 
 <body>
@@ -304,13 +304,13 @@
 
     <script src="{{asset('assets')}}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+
 
     <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="{{asset('assets')}}/js/feather.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+    @stack('tableJS')
 
     <script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="text/javascript"></script>
     <script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="text/javascript"></script>

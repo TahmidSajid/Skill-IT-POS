@@ -4,14 +4,86 @@ namespace App\Livewire\Pages\Course\Category;
 
 use App\Models\Categories;
 use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use Livewire\Component;
 
 class CategoryList extends Component
 {
-    #[Computed()]
-    public function categories(){
-        return Categories::all();
+    use WithPagination;
+    use WithFileUploads;
+
+    #[Validate('required')]
+    public $categoryName;
+    public $categoryDescription;
+    #[Validate('required')]
+    public $categoryImage;
+    public $imagePreview;
+
+    #[On('reloading')]
+    public function reloading(){
+        unset($this->categories);
     }
+
+
+    #[Computed]
+    public function categories(){
+        return Categories::paginate(5);
+    }
+
+
+    public function delete($id){
+        $categoryInfo = Categories::where('id',$id)->first();
+        if($categoryInfo->category_photo){
+            unlink('uploads/category_photos/'.$categoryInfo->category_photo);
+        }
+        Categories::where('id',$id)->delete();
+        notyf()->addSuccess('Category deleted');
+    }
+
+
+    public function edit($id){
+        $categoryInfo = Categories::where('id',$id)->first();
+        $this->categoryName = $categoryInfo->category_name;
+        $this->categoryDescription = $categoryInfo->category_description;
+        $this->categoryImage = $categoryInfo->category_photo;
+        $this->imagePreview = $categoryInfo->category_photo;
+
+    }
+
+
+    public function updateCategory($id){
+        $this->validate();
+        $categoryInfo = Categories::where('id',$id)->first();
+        if($categoryInfo->category_photo){
+            unlink('uploads/category_photos/'.$categoryInfo->category_photo);
+        }
+        $Image = new ImageManager(new Driver());
+        $new_name = Str::random(5).time().".".$this->categoryImage->getClientOriginalExtension();
+        $image = $Image->read($this->categoryImage)->resize(720,400);
+        $image->save(('uploads/category_photos/'.$new_name),quality: 30);
+        $tag = "#".str::slug($this->categoryName);
+        Categories::where('id',$id)->update([
+            'category_name' => $this->categoryName,
+            'category_tag' => $tag,
+            'category_photo' => $new_name,
+        ]);
+        if ($this->categoryDescription) {
+            Categories::where('id',$id)->update([
+                'category_description' => $this->categoryDescription,
+            ]);
+        };
+        notyf()->addSuccess('Category Updated successfuly');
+        $this->reset();
+    }
+
+
+    #[On('reloading')]
     public function render()
     {
         return view('livewire.pages.course.category.category-list');

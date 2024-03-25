@@ -40,6 +40,8 @@ class AddCategory extends Component
                 'category_description' => $this->categoryDescription,
             ]);
         };
+        $this->dispatch('reloading');
+        notyf()->addSuccess('Category added successfuly');
         $this->reset('categoryName','categoryDescription','categoryImage');
     }
 

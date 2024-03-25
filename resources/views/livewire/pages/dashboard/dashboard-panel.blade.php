@@ -1,21 +1,34 @@
 <div>
-
     <div class="profile-set">
         <div class="profile-head">
         </div>
         <div class="profile-top">
             <div class="profile-content">
-                <div class="profile-contentimg">
-                    <img src="assets/img/customer/customer5.jpg" alt="img" id="blah">
-                    <div class="profileupload">
-                        <input type="file" id="imgInp">
-                        <a href="javascript:void(0);"><img src="assets/img/icons/edit-set.svg" alt="img"></a>
+                <form wire:submit="saveImg">
+                    <div wire:ignore>
+                        <div class="profile-contentimg">
+                            @if ($profileImg)
+                                <img src="{{ $profileImg }}" alt="img" id="blah">
+                            @else
+                                <img src="{{ asset('uploads/profile_photos') }}/{{ auth()->user()->photo }}" alt="img" id="blah">
+                            @endif
+                            <div class="profileupload">
+                                <input type="file" id="imgInp" wire:model="profileImg">
+                                <a href="javascript:void(0);"><img src="assets/img/icons/edit-set.svg"
+                                        alt="img"></a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="profile-contentname">
-                    <h2>{{ $userName }}</h2>
-                    <h4>{{ $userRole }}</h4>
-                </div>
+                    <div class="profile-contentname">
+                        <h2>{{ $userName }}</h2>
+                        <h4>{{ $userRole }}</h4>
+                    </div>
+                    <div class="profile-contentname mt-4 pt-3">
+                        @if ($profileImg)
+                            <button class="btn btn-submit" type="submit">Change picture</button>
+                        @endif
+                    </div>
+                </form>
             </div>
         </div>
     </div>

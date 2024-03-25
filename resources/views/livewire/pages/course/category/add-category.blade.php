@@ -21,9 +21,11 @@
                     <div class="form-group">
                         <label> Category Image</label>
                         <div class="image-upload mb-0">
-                            <input type="file" wire:model="categoryImage" onchange="document.getElementById('cateImg').src = window.URL.createObjectURL(this.files[0]);document.getElementById('cateImg').classList.toggle('d-none')">
-                            <div class="image-uploads" wire:ignore>
-                                <img src="{{ $categoryImage }}" class="d-none" style="height: 40px; width:70px;" id="cateImg" alt="img">
+                            <input type="file" wire:model="categoryImage"
+                                onchange="document.getElementById('cateImg').src = window.URL.createObjectURL(this.files[0]);">
+                            <div class="image-uploads">
+                                <img src="{{ $categoryImage }}" class="" style="height: 40px; width:70px;"
+                                    id="cateImg" alt="img">
                                 <h4>Drag and drop a file to upload</h4>
                             </div>
                         </div>
@@ -33,10 +35,14 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <button class="btn btn-submit me-2" type="submit" onclick="document.getElementById('cateImg').src ='';document.getElementById('cateImg').classList.toggle('d-none')">Submit</button>
+                    <button class="btn btn-submit me-2" type="submit"
+                        onclick="document.getElementById('cateImg').src ='';" wire:loading.remove wire:target="addCategory">Submit</button>
+                    <button class="btn btn-primary mb-1" type="button" disabled="" wire:loading wire:target="addCategory">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">Loading...</span>
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
