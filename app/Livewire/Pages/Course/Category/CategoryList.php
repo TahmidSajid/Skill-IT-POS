@@ -21,8 +21,7 @@ class CategoryList extends Component
     #[Validate('required')]
     public $categoryName;
     public $categoryDescription;
-    #[Validate('required')]
-    public $categoryImage;
+    public $categoryUpdateImage;
     public $imagePreview;
 
     #[On('reloading')]
@@ -51,7 +50,6 @@ class CategoryList extends Component
         $categoryInfo = Categories::where('id',$id)->first();
         $this->categoryName = $categoryInfo->category_name;
         $this->categoryDescription = $categoryInfo->category_description;
-        $this->categoryImage = $categoryInfo->category_photo;
         $this->imagePreview = $categoryInfo->category_photo;
 
     }
@@ -64,18 +62,22 @@ class CategoryList extends Component
             unlink('uploads/category_photos/'.$categoryInfo->category_photo);
         }
         $Image = new ImageManager(new Driver());
-        $new_name = Str::random(5).time().".".$this->categoryImage->getClientOriginalExtension();
-        $image = $Image->read($this->categoryImage)->resize(720,400);
-        $image->save(('uploads/category_photos/'.$new_name),quality: 30);
+        $new_name = Str::random(5).time().".".$this->categoryUpdateImage->getClientOriginalExtension();
+        $image = $Image->read($this->categoryUpdateImage)->resize(720,540);
+        $image->save(('uploads/category_photos/'.$new_name),quality: 80);
         $tag = "#".str::slug($this->categoryName);
         Categories::where('id',$id)->update([
             'category_name' => $this->categoryName,
             'category_tag' => $tag,
-            'category_photo' => $new_name,
         ]);
         if ($this->categoryDescription) {
             Categories::where('id',$id)->update([
                 'category_description' => $this->categoryDescription,
+            ]);
+        };
+        if ($this->categoryUpdateImage) {
+            Categories::where('id',$id)->update([
+                'category_photo' => $new_name,
             ]);
         };
         notyf()->addSuccess('Category Updated successfuly');

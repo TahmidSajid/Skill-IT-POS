@@ -24,7 +24,7 @@ class AddCategory extends Component
 
         $Image = new ImageManager(new Driver());
         $new_name = Str::random(5).time().".".$this->categoryImage->getClientOriginalExtension();
-        $image = $Image->read($this->categoryImage)->resize(720,400);
+        $image = $Image->read($this->categoryImage)->resize(720,540);
         $image->save(('uploads/category_photos/'.$new_name),quality: 30);
         $tag = "#".str::slug($this->categoryName);
 

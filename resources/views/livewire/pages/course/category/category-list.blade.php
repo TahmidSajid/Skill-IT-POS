@@ -74,23 +74,27 @@
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
+                                                                <label>Category Image</label>
+                                                                <div class="image-uploads">
+                                                                    <img src="{{ asset('uploads/category_photos') }}/{{ $imagePreview }}"
+                                                                        style="height:250px; width:250px;"
+                                                                        alt="img">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
                                                                 <label> Category Image</label>
-                                                                <div class="image-upload mb-0"
-                                                                    style="padding: 100px 0px">
-                                                                    <input type="file" wire:model="categoryImage"
-                                                                        onchange="document.getElementById('cateImgThree').src = window.URL.createObjectURL(this.files[0])">
-                                                                    <div class="image-uploads">
-                                                                        <img src="{{ $categoryImage }}"
-                                                                            style="height: 50px; width:50px;"
-                                                                            id="cateImgThree" alt="img">
-                                                                        <h4>Drag and drop a file to upload</h4>
-                                                                        <img src="{{ asset('uploads/category_photos') }}/{{ $imagePreview }}"
-                                                                            style="height: 50px; width:50px;"
+                                                                <div class="image-upload mb-0">
+                                                                    <input type="file" wire:model="categoryUpdateImage" onchange="document.getElementById('cateImg2').src = window.URL.createObjectURL(this.files[0]);document.getElementById('cateImg2').classList.toggle('d-none')">
+                                                                    <div class="image-uploads" wire.ignore>
+                                                                        <img src="{{ $categoryUpdateImage }}" class="d-none"
+                                                                            style="height: 300px; width:300px;"
                                                                             id="cateImg2" alt="img">
-                                                                        <h4>previous image</h4>
+                                                                        <h4>Drag and drop a file to upload</h4>
                                                                     </div>
                                                                 </div>
-                                                                @error('categoryImage')
+                                                                @error('categoryUpdateImage')
                                                                     <p class="text-danger">{{ $message }}</p>
                                                                 @enderror
                                                             </div>
@@ -127,10 +131,6 @@
         </div>
     </div>
 </div>
-@push('tableJS')
-    <script src="{{ asset('assets') }}/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="{{ asset('assets') }}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
-@endpush
 @push('paginationCss')
     <style rel="stylesheet">
         .pagination {

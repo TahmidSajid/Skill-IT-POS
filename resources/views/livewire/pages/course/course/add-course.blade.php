@@ -13,11 +13,15 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 col-sm-6 col-12">
-                    <div class="form-group mt-4 mb-2" wire:ignore>
+                    <div class="form-group mt-4 mb-2">
                         <label>Category</label>
-                        <select class="select" wire:model="categoryId">
+                        <select class="form-select" wire:model.live="categoryId">
                             <option>Choose Category</option>
-                            <option>Computers</option>
+                            @forelse ($this->categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @empty
+                                <option>Nothing added yet</option>
+                            @endforelse
                         </select>
                     </div>
                     @error('categoryId')
@@ -25,12 +29,17 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 col-sm-6 col-12">
-                    <div class="form-group mt-4 mb-2" wire:ignore>
+                    <div class="form-group mt-4 mb-2">
                         <label>Sub Category</label>
-                        <select class="select" wire:model="subCategoryId">
+                        <select class="form-select" multiple {{ !$categoryId ? 'disabled' : '' }} wire:model.live="subCategoryId" aria-label="multiple select example">
                             <option>Choose Sub Category</option>
-                            <option>Fruits</option>
+                            @forelse ($this->subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}">{{ $subcategory->category_name }}</option>
+                            @empty
+                                <option>Nothing added yet</option>
+                            @endforelse
                         </select>
+                        <p>to select multiple (crlt+click) </p>
                     </div>
                     @error('subCategoryId')
                         <p class="text-danger">{{ $message }}</p>
@@ -89,8 +98,8 @@
                     <div class="form-group mt-4 mb-2" wire:ignore>
                         <label> Status</label>
                         <select class="select" wire:model="status">
-                            <option>Closed</option>
-                            <option>Open</option>
+                            <option value="closed" >Closed</option>
+                            <option value="open">Open</option>
                         </select>
                     </div>
                     @error('status')
@@ -120,3 +129,6 @@
         </div>
     </div>
 </div>
+@push('customeJS')
+    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+@endpush
