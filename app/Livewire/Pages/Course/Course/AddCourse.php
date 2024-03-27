@@ -53,6 +53,7 @@ class AddCourse extends Component
         $data = [
             'course_name' => $this->courseName,
             'category_id' => $this->categoryId,
+            'description' => $this->description,
             'cost' => $this->cost,
             'price' => $this->price,
             'discount_price' => $this->discountPrice,
@@ -67,7 +68,8 @@ class AddCourse extends Component
                 'subcategory_id'=> $value,
             ]);
         };
-        notyf()->addSuccess('Category added successfuly');
+        notyf()->addSuccess('Course added successfuly');
+        $this->dispatch('reloading');
         $this->reset();
     }
     public function render()

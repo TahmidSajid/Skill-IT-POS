@@ -32,12 +32,14 @@
                     <div class="form-group mt-4 mb-2">
                         <label>Sub Category</label>
                         <select class="form-select" multiple {{ !$categoryId ? 'disabled' : '' }} wire:model.live="subCategoryId" aria-label="multiple select example">
-                            <option>Choose Sub Category</option>
+                            <option class="mb-2">Choose Sub Category</option>
+                            @if ($categoryId)
                             @forelse ($this->subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}">{{ $subcategory->category_name }}</option>
+                                <option class="mb-2" value="{{ $subcategory->id }}">{{ $subcategory->category_name }}</option>
                             @empty
                                 <option>Nothing added yet</option>
                             @endforelse
+                            @endif
                         </select>
                         <p>to select multiple (crlt+click) </p>
                     </div>
@@ -57,7 +59,7 @@
                 <div class="col-lg-12 col-sm-6 col-12">
                     <div class="form-group mt-4 mb-2">
                         <label>Cost</label>
-                        <input type="text" class="form-control @error('cost') is-invalid @enderror"
+                        <input type="number" class="form-control @error('cost') is-invalid @enderror"
                             wire:model="cost">
                     </div>
                     @error('cost')
@@ -77,7 +79,7 @@
                 <div class="col-lg-12 col-sm-6 col-12">
                     <div class="form-group my-4 mb-2">
                         <label>Price</label>
-                        <input type="text" class="form-control @error('price') is-invalid @enderror"
+                        <input type="number" class="form-control @error('price') is-invalid @enderror"
                             wire:model="price" />
                     </div>
                     @error('price')
@@ -87,7 +89,7 @@
                 <div class="col-lg-12 col-sm-6 col-12">
                     <div class="form-group mt-4 mb-2">
                         <label>Discount Price</label>
-                        <input type="text" class="form-control @error('discountPrice') is-invalid @enderror"
+                        <input type="number" class="form-control @error('discountPrice') is-invalid @enderror"
                             wire:model="discountPrice" />
                     </div>
                     @error('discountPrice')

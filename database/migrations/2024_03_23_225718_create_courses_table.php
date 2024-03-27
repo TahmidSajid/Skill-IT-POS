@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('course_name');
             $table->string('category_id');
-            $table->string('cost');
-            $table->string('price');
-            $table->string('discount_price');
+            $table->longText('description');
+            $table->float('cost');
+            $table->float('price');
+            $table->float('discount_price')->nullable();
             $table->string('status');
             $table->string('course_image');
             $table->timestamps();
