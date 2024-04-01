@@ -16,11 +16,11 @@
                     <div class="form-group mt-4 mb-2">
                         <label>Category</label>
                         <select class="form-select" wire:model.live="categoryId">
-                            <option>Choose Category</option>
+                            <option value="">Choose Category</option>
                             @forelse ($this->categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @empty
-                                <option>Nothing added yet</option>
+                                <option value="">Nothing added yet</option>
                             @endforelse
                         </select>
                     </div>
@@ -31,14 +31,16 @@
                 <div class="col-lg-12 col-sm-6 col-12">
                     <div class="form-group mt-4 mb-2">
                         <label>Sub Category</label>
-                        <select class="form-select" multiple {{ !$categoryId ? 'disabled' : '' }} wire:model.live="subCategoryId" aria-label="multiple select example">
+                        <select class="form-select" multiple {{ !$categoryId ? 'disabled' : '' }}
+                            wire:model.live="subCategoryId" aria-label="multiple select example">
                             <option class="mb-2">Choose Sub Category</option>
                             @if ($categoryId)
-                            @forelse ($this->subcategories as $subcategory)
-                                <option class="mb-2" value="{{ $subcategory->id }}">{{ $subcategory->category_name }}</option>
-                            @empty
-                                <option>Nothing added yet</option>
-                            @endforelse
+                                @forelse ($this->subcategories as $subcategory)
+                                    <option class="mb-2" value="{{ $subcategory->id }}">
+                                        {{ $subcategory->category_name }}</option>
+                                @empty
+                                    <option>Nothing added yet</option>
+                                @endforelse
                             @endif
                         </select>
                         <p>to select multiple (crlt+click) </p>
@@ -66,16 +68,6 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                {{-- <div class="col-lg-3 col-sm-6 col-12">
-                <div class="form-group">
-                    <label>Discount Type</label>
-                    <select class="select">
-                        <option>Percentage</option>
-                        <option>10%</option>
-                        <option>20%</option>
-                    </select>
-                </div>
-            </div> --}}
                 <div class="col-lg-12 col-sm-6 col-12">
                     <div class="form-group my-4 mb-2">
                         <label>Price</label>
@@ -100,7 +92,7 @@
                     <div class="form-group mt-4 mb-2" wire:ignore>
                         <label> Status</label>
                         <select class="select" wire:model="status">
-                            <option value="closed" >Closed</option>
+                            <option value="closed">Closed</option>
                             <option value="open">Open</option>
                         </select>
                     </div>
@@ -113,9 +105,11 @@
                         <label> Course Image</label>
                         <div class="image-upload mb-3">
                             <input type="file" class="form-control @error('courseImage') is-invalid @enderror"
-                                wire:model="courseImage" />
-                            <div class="image-uploads">
-                                <img src="assets/img/icons/upload.svg" alt="img" />
+                                wire:model="courseImage"
+                                onchange="document.getElementById('courseImg').src = window.URL.createObjectURL(this.files[0]);" />
+                            <div class="image-uploads" wire:ignore>
+                                <img src="{{ asset('assets') }}/img/icons/upload.svg" class=""
+                                    style="height: 50px; width:50px;" id="courseImg" alt="img">
                                 <h4>Drag and drop a file to upload</h4>
                             </div>
                         </div>
@@ -125,12 +119,12 @@
                     @enderror
                 </div>
                 <div class="col-lg-12">
-                    <button type="submit" class="btn btn-submit me-2 mt-2">Submit</button>
+                    <button type="submit" class="btn btn-submit me-2 mt-2" onclick="document.getElementById('courseImg').src='{{ asset('assets') }}/img/icons/upload.svg' ">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 @push('customeJS')
-    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
 @endpush

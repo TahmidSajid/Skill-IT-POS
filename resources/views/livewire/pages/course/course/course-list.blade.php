@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="">
-            <table class="table">
+            <table class="table text-center">
                 <thead>
                     <tr>
                         <th>
@@ -12,6 +12,7 @@
                         </th>
                         <th>Course name</th>
                         <th>Category</th>
+                        <th>Sub-Category</th>
                         <th>Description</th>
                         <th>Cost</th>
                         <th>Price</th>
@@ -36,17 +37,31 @@
                                 </a>
                                 <a href="javascript:void(0);">{{ $course->course_name }}</a>
                             </td>
-                            <td>{{ $course->getCategory->category_name}}</td>
-                            {{-- <td>{{ $category->description }}</td> --}}
+                            <td>{{ $course->getCategory->category_tag }}</td>
+                            @php
+                                $subCate = App\Models\Subcategory::where('course_id',$course->id)->get();
+                            @endphp
+                            <td>
+                                @foreach ( $subCate as $x)
+                                    {{ $x->getCategoryName->category_tag }} <br>
+                                @endforeach
+                            </td>
+                            <td>{{ $course->description }}</td>
                             <td>{{ $course->cost }}</td>
                             <td>{{ $course->price }}</td>
                             <td>{{ $course->discount_price }}</td>
-                            <td>{{ $course->status }}</td>
                             <td>
-                                {{-- <button style="background: none; border:0px" class="me-3 confirm-text"type="button"
+                                @if ($course->status == 'open')
+                                <span class="badges bg-lightgreen">{{ $course->status }}</span>
+                                @else
+                                <span class="badges bg-lightred">{{ $course->status }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <button style="background: none; border:0px" class="me-3 confirm-text"type="button"
                                     class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal{{ $key }}"
-                                    wire:click="edit({{ $category->id }})">
+                                    wire:click="edit({{ $course->id }})">
                                     <img src="assets/img/icons/edit.svg" alt="img">
                                 </button>
                                 <!-- Modal -->
@@ -60,59 +75,12 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- Updateing form Start
+                                                <!-- Updating form Start
                                                 ================================================== -->
-                                                <form wire:submit="updateCategory({{ $category->id }})">
-                                                    <div class="row">
-                                                        <div class="col-lg-12 col-sm-6 col-12">
-                                                            <div class="form-group">
-                                                                <label>Category Name</label>
-                                                                <input type="text" wire:model="categoryName">
-                                                                @error('categoryName')
-                                                                    <p class="text-danger">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label>Description <span
-                                                                        style="font-size: 10px">(Optional)</span></label>
-                                                                <textarea class="form-control" wire:model="categoryDescription"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label>Category Image</label>
-                                                                <div class="image-uploads">
-                                                                    <img src="{{ asset('uploads/category_photos') }}/{{ $imagePreview }}"
-                                                                        style="height:250px; width:250px;"
-                                                                        alt="img">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label> Category Image</label>
-                                                                <div class="image-upload mb-0">
-                                                                    <input type="file" wire:model="categoryUpdateImage" onchange="document.getElementById('cateImg2').src = window.URL.createObjectURL(this.files[0]);document.getElementById('cateImg2').classList.toggle('d-none')">
-                                                                    <div class="image-uploads" wire.ignore>
-                                                                        <img src="{{ $categoryUpdateImage }}" class="d-none"
-                                                                            style="height: 300px; width:300px;"
-                                                                            id="cateImg2" alt="img">
-                                                                        <h4>Drag and drop a file to upload</h4>
-                                                                    </div>
-                                                                </div>
-                                                                @error('categoryUpdateImage')
-                                                                    <p class="text-danger">{{ $message }}</p>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="btn btn-primary" class="btn btn-submit me-2"
-                                                        data-bs-dismiss="modal" type="submit">Save
-                                                    </button>
-                                                </form>
-                                                <!-- Updateing form End
+                                                <div class="row">
+                                                    @include('components.dashboard.course-edit')
+                                                </div>
+                                                <!-- Updating form End
                                                 ================================================== -->
                                             </div>
                                             <div class="modal-footer">
@@ -121,7 +89,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <button style="background: none; border:0px" class="me-3"
                                     wire:click="delete({{ $course->id }})">
                                     <img src="assets/img/icons/delete.svg" alt="img">
@@ -130,9 +98,9 @@
                         </tr>
                     @endforeach
                     <tr>
-                        {{-- <td colspan="3">
-                            {{ $this->categories->links() }}
-                        </td> --}}
+                        <td colspan="10" class="text-center">
+                            {{ $this->courses->links() }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

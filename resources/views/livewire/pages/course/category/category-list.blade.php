@@ -74,7 +74,7 @@
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
-                                                                <label>Category Image</label>
+                                                                <label>Current Category Image</label>
                                                                 <div class="image-uploads">
                                                                     <img src="{{ asset('uploads/category_photos') }}/{{ $imagePreview }}"
                                                                         style="height:250px; width:250px;"
@@ -86,11 +86,13 @@
                                                             <div class="form-group">
                                                                 <label> Category Image</label>
                                                                 <div class="image-upload mb-0">
-                                                                    <input type="file" wire:model="categoryUpdateImage" onchange="document.getElementById('cateImg2').src = window.URL.createObjectURL(this.files[0]);document.getElementById('cateImg2').classList.toggle('d-none')">
-                                                                    <div class="image-uploads" wire.ignore>
-                                                                        <img src="{{ $categoryUpdateImage }}" class="d-none"
-                                                                            style="height: 300px; width:300px;"
-                                                                            id="cateImg2" alt="img">
+                                                                    <input type="file"
+                                                                        wire:model="categoryUpdateImage"
+                                                                        onchange="document.getElementById('cateImgUpdate{{ $key }}').src = window.URL.createObjectURL(this.files[0]);">
+                                                                    <div class="image-uploads" wire:ignore>
+                                                                        <img src="{{ asset('assets') }}/img/icons/upload.svg"
+                                                                            style="height: 50px; width:50px;"
+                                                                            id="cateImgUpdate{{ $key }}" alt="img">
                                                                         <h4>Drag and drop a file to upload</h4>
                                                                     </div>
                                                                 </div>
@@ -122,7 +124,7 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="3">
+                        <td colspan="5">
                             {{ $this->categories->links() }}
                         </td>
                     </tr>
