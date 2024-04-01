@@ -281,6 +281,14 @@
                                 <li><a href="{{ route('courses') }}">Course</a></li>
                             </ul>
                         </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img src="{{ asset('assets') }}/img/icons/users1.svg"
+                                    alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{{ route('students') }}">Students</a></li>
+                                {{-- <li><a href="{{ route('courses') }}">Course</a></li> --}}
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

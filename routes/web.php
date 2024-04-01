@@ -20,5 +20,5 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'view'])->name('profile');
 Route::get('/courses', [App\Http\Controllers\CoursesController::class, 'view'])->name('courses');
-Route::get('/category', [App\Http\Controllers\CategoriesController::class, 'viwe'])->name('caterory');
-// Route::post('/change/name', [App\Http\Controllers\DashboardController::class, 'change_name'])->name('change_name');
+Route::get('/category', [App\Http\Controllers\CategoriesController::class, 'view'])->name('caterory');
+Route::get('/students', [App\Http\Controllers\StudentsController::class, 'view'])->name('students');

@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class StudentsController extends Controller
 {
     public function view(){
-        return view('category');
+        return view('students');
     }
+
 }
