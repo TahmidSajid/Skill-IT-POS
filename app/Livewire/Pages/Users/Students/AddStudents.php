@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages\Users\Students;
 
 use App\Mail\student_account;
-use App\Models\Students;
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -33,14 +33,14 @@ class AddStudents extends Component
             'status' => 'incative',
             'role' => 'student',
         ];
-        $student_info = Students::create($data);
+        $student_info = User::create($data);
 
         if($this->photo){
             $Image = new ImageManager(new Driver());
             $new_name = Str::random(5) . time() . "." . $this->photo->getClientOriginalExtension();
             $image = $Image->read($this->photo)->resize(540, 540);
             $image->save(('uploads/student_photos/' . $new_name), quality: 80);
-            Students::where('id',$student_info->id)->update([
+            User::where('id',$student_info->id)->update([
                 'photo' => $new_name,
             ]);
         };

@@ -9,8 +9,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-lg-4">
             <livewire:pages.users.students.add-students/>
+        </div>
+        <div class="col-lg-8">
+            <livewire:pages.users.students.students-list/>
         </div>
     </div>
 @endsection
