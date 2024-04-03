@@ -18,7 +18,7 @@ class AddStudents extends Component
     use WithFileUploads;
 
     #[Validate('required')]
-    public $name, $email , $mobile ;
+    public $name, $email , $phone ;
     public $photo ;
 
     public function addStudents(){
@@ -28,7 +28,7 @@ class AddStudents extends Component
         $data = [
             'name' => $this->name,
             'email' => $this->email,
-            'phone' => $this->mobile,
+            'phone' => $this->phone,
             'password' => Hash::make($password),
             'status' => 'incative',
             'role' => 'student',
@@ -47,6 +47,7 @@ class AddStudents extends Component
 
         Mail::to($this->email)->send(new student_account($this->name,$this->email,$password));
 
+        $this->dispatch('reloading');
         notyf()->addSuccess('Student added successfuly');
         $this->reset();
 

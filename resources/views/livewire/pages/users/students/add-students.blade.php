@@ -5,17 +5,17 @@
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="name" wire:model='name'>
+                        <input type="name" class="form-control" placeholder="Enter name" wire:model='name'>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" wire:model='email'>
+                        <input type="email" class="form-control" placeholder="Enter email" wire:model='email'>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-12">
                     <div class="form-group">
                         <label>Mobile</label>
-                        <input type="number" wire:model='mobile'>
+                        <input type="tel" class="form-control" placeholder="Enter phone" wire:model='phone'>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-12">

@@ -22,3 +22,4 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'view'])-
 Route::get('/courses', [App\Http\Controllers\CoursesController::class, 'view'])->name('courses');
 Route::get('/category', [App\Http\Controllers\CategoriesController::class, 'view'])->name('caterory');
 Route::get('/students', [App\Http\Controllers\StudentsController::class, 'view'])->name('students');
+Route::get('/enrollment', [App\Http\Controllers\EnrollmentsController::class, 'view'])->name('enroll');

@@ -19,7 +19,8 @@ class AddCourse extends Component
     use WithFileUploads;
 
     #[Validate('required')]
-    public $courseName, $categoryId, $subCategoryId = [], $description, $cost, $price, $status, $courseImage;
+    public $courseName, $categoryId, $description, $cost, $price, $status, $courseImage;
+    public $subCategoryId = [];
     public $discountPrice;
 
 
@@ -91,7 +92,7 @@ class AddCourse extends Component
             ]);
         };
 
-        
+
         notyf()->addSuccess('Course added successfuly');
         $this->dispatch('reloading');
         $this->reset();

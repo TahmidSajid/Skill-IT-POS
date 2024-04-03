@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($this->students as $student)
+                    @forelse ($this->students as $key => $student)
                         <tr>
                             <td>
                                 <label class="checkboxs">
@@ -28,7 +28,14 @@
                                     <span class="checkmarks"></span>
                                 </label>
                             </td>
-                            <td>{{ $student->name }}</td>
+                            <td class="productimgname" wire:ignore>
+                                <a href="{{ asset('uploads/student_photos') }}/{{ $student->photo }}" class="product-img image-popup">
+                                    <img class="img-fluid"
+                                        src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}"
+                                        alt="product">
+                                </a>
+                                {{ $student->name }}
+                            </td>
                             <td>{{ $student->phone }}</td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->role }}</td>
@@ -49,12 +56,21 @@
 
                             </td>
                             <td>
-                                <a class="me-3" href="newuseredit.html">
+                                <button class="me-3 bg-transparent border-0" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal{{ $key }}"
+                                    wire:click="edit({{ $student->id }})">
                                     <img src="assets/img/icons/edit.svg" alt="img">
-                                </a>
-                                <a class="me-3 confirm-text" href="javascript:void(0);">
-                                    <img src="assets/img/icons/delete.svg" alt="img">
-                                </a>
+                                </button>
+                                <!-- Modal -->
+                                <!-- student edit form start
+                                ================================================== -->
+                                @include('components.dashboard.student-edit')
+                                <!-- student edit form end
+                                ================================================== -->
+                                <button type="button" class="me-3 confirm-text bg-transparent border-0"
+                                    wire:click="delete({{ $student->id }})">
+                                    <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img">
+                                </button>
                             </td>
                         </tr>
                     @empty
@@ -64,3 +80,11 @@
         </div>
     </div>
 </div>
+
+@push('pluginCss')
+    <link rel="stylesheet" href="{{ asset('assets') }}/plugins/lightbox/glightbox.min.css">
+@endpush
+@push('pluginJs')
+    <script src="{{ asset('assets') }}/plugins/lightbox/glightbox.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/plugins/lightbox/lightbox.js" type="text/javascript"></script>
+@endpush

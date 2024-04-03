@@ -27,6 +27,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
+    @stack('pluginCss')
     @stack('paginationCss')
 </head>
 
@@ -264,30 +265,49 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="active">
-                            <a href="{{ route('home') }}"><img src="{{ asset('assets') }}/img/icons/dashboard.svg"
-                                    alt="img"><span>
-                                    Dashboard</span> </a>
+                            <a href="{{ route('home') }}">
+                                <i class="fa-solid fa-gauge"></i>
+                                <span>
+                                    Dashboard
+                                </span>
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('profile') }}"><img
-                                    src="{{ asset('assets') }}/img/icons/dashboard.svg" alt="img"><span>
-                                    Profile</span> </a>
+                            <a href="{{ route('profile') }}">
+                                <i class="fa-solid fa-user"></i>
+                                <span>
+                                    Profile
+                                </span>
+                            </a>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><img src="{{ asset('assets') }}/img/icons/product.svg"
-                                    alt="img"><span> Course</span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);">
+                                <i class="fa-solid fa-book-open-reader"></i>
+                                <span> Course</span>
+                                <span class="menu-arrow"></span>
+                            </a>
                             <ul>
                                 <li><a href="{{ route('caterory') }}">Category</a></li>
                                 <li><a href="{{ route('courses') }}">Course</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);"><img src="{{ asset('assets') }}/img/icons/users1.svg"
-                                    alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);">
+                                <i class="fa-solid fa-users"></i>
+                                <span> Users</span>
+                                <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a href="{{ route('students') }}">Students</a></li>
                                 {{-- <li><a href="{{ route('courses') }}">Course</a></li> --}}
                             </ul>
+                        </li>
+                        <li>
+                            <a href="{{ route('enroll') }}">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                                <span>
+                                    Enrollment
+                                </span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -306,34 +326,34 @@
     </div>
 
 
-    <script src="{{asset('assets')}}/js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/feather.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/feather.min.js" type="text/javascript"></script>
 
-    <script src="{{asset('assets')}}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
 
 
-    <script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/js/feather.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/feather.min.js" type="text/javascript"></script>
     <script src="{{ asset('assets') }}/js/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="{{ asset('assets') }}/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
     @stack('tableJS')
 
-    <script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="text/javascript"></script>
-    <script src="{{asset('assets')}}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/plugins/apexchart/apexcharts.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/plugins/apexchart/chart-data.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>
 
 
-    <script src="{{asset('assets')}}/js/script.js" type="text/javascript"></script>
+    <script src="{{ asset('assets') }}/js/script.js" type="text/javascript"></script>
     <script src="{{ asset('assets') }}/js/cloudflare-static/rocket-loader.min.js"
         data-cf-settings="a0ab8ad93cdb647a28609877-|49" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     @yield('alert')
-
     @stack('customeJS')
+    @stack('pluginJs')
 </body>
 
 </html>
