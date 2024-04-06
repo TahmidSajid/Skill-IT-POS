@@ -89,9 +89,9 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 col-sm-6 col-12">
-                    <div class="form-group mt-4 mb-2" wire:ignore>
+                    <div class="form-group mt-4 mb-2">
                         <label> Status</label>
-                        <select class="select" wire:model="status">
+                        <select class="form-select" wire:model="status">
                             <option value="closed">Closed</option>
                             <option value="open">Open</option>
                         </select>

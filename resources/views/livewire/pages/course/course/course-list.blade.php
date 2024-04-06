@@ -46,7 +46,7 @@
                                     {{ $x->getCategoryName->category_tag }} <br>
                                 @endforeach
                             </td>
-                            <td>{{ $course->description }}</td>
+                            <td>{{ Str::limit($course->description, 10, '...')  }}</td>
                             <td>{{ $course->cost }}</td>
                             <td>{{ $course->price }}</td>
                             <td>{{ $course->discount_price }}</td>

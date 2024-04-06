@@ -3,6 +3,8 @@
 namespace App\Livewire\Enrollment;
 
 use App\Models\Courses;
+use App\Models\Students;
+use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use PhpParser\Node\Stmt\Return_;
@@ -10,6 +12,8 @@ use PhpParser\Node\Stmt\Return_;
 class Enrollment extends Component
 {
     public $search;
+    public $studentSearch;
+    public $candidates = [];
 
     public function render()
     {
@@ -18,6 +22,15 @@ class Enrollment extends Component
 
     #[Computed]
     public function courses(){
-        return $courses = Courses::where('course_name','LIKE',"%{$this->search}%")->get();
+        return Courses::where('course_name','LIKE',"%{$this->search}%")->get();
+    }
+
+    #[Computed]
+    public function students(){
+        return User::where('role','student')->where('name','LIKE',"%{$this->studentSearch}%")->get();
+    }
+
+    public function enroll(){
+        dd($this->candidates);
     }
 }
