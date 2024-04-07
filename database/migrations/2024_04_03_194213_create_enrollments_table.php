@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('course_id');
             $table->string('user_id');
+            $table->string('payment')->default('due');
             $table->timestamps();
         });
     }

@@ -75,6 +75,11 @@
                         </tr>
                     @empty
                     @endforelse
+                    <tr>
+                        <td colspan="5">
+                            {{ $this->categories->links() }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

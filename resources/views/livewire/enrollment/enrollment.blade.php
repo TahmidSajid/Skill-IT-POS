@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <button class="btn btn-submit" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal{{ $key }}">Enroll</button>
+                            data-bs-target="#exampleModal{{ $key }}" wire:click="enrollStart({{ $course }})">Enroll</button>
                     </div>
                     <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -56,67 +56,21 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <form wire:submit="enroll">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <div class="row mb-4">
-                                                <div class="col-lg-4 offset-lg-8">
-                                                    <div class="input-group">
-                                                        <input class="form-control border-end-0 border" type="search" wire:model.live="studentSearch" value="search"
-                                                            id="example-search-input" placeholder="search here....">
-                                                        <span class="input-group-append bg-transparent">
-                                                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
-                                                                type="button">
-                                                                <i class="fa fa-search"></i>
-                                                            </button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <table class="table table-bordered mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Phone</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <form wire:submit="enroll">
-                                                        @forelse ($this->students as $student)
-                                                            <tr>
-                                                                <td class="d-flex align-items-center">
-                                                                    <input class="form-check-input mx-2"
-                                                                        wire:model.live="candidates" type="checkbox"
-                                                                        value="{{ $student->id }}">
-                                                                    <a class="product-img" class="mx-2">
-                                                                        <img src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}"
-                                                                            alt="">
-                                                                    </a>
-                                                                    <a href=""
-                                                                        class="mx-2">{{ $student->name }}</a>
-                                                                </td>
-                                                                <td>
-                                                                    {{ $student->phone }}
-                                                                </td>
-                                                                <td>
-                                                                    {{ $student->status }}
-                                                                </td>
-                                                            </tr>
-                                                        @empty
-                                                        @endforelse
-
-
-                                                </tbody>
-                                            </table>
-                                            <button class="btn btn-submit" type="submit">Add</button>
-                                            </form>
+                                            @include('components.dashboard.enrollment_student_list')
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @include('components.dashboard.enrollment_form')
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary">Enroll</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -125,10 +79,101 @@
             </div>
         @endforeach
     </div>
+    {{ $this->payment }}
 </div>
+
+@push('paginationCss')
+    <style rel="stylesheet">
+        .pagination {
+            color: white !important;
+        }
+
+        .page-link {
+            color: white !important;
+            background: #868484 !important;
+        }
+
+        .page-item.active .page-link {
+            border: 0px !important;
+            color: black !important;
+            background: #ff9f43 !important;
+            transform: scale(1.2);
+            transition: 0.5s
+        }
+    </style>
+@endpush
 
 @push('pluginCss')
     <link href="vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, ".SFNSText-Regular", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+        }
+
+        .toggle {
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .toggle-switch {
+            display: inline-block;
+            background: #ccc;
+            border-radius: 16px;
+            width: 58px;
+            height: 32px;
+            position: relative;
+            vertical-align: middle;
+            transition: background 0.25s;
+        }
+
+        .toggle-switch:before,
+        .toggle-switch:after {
+            content: "";
+        }
+
+        .toggle-switch:before {
+            display: block;
+            background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            transition: left 0.25s;
+        }
+
+        .toggle:hover .toggle-switch:before {
+            background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .toggle-checkbox:checked+.toggle-switch {
+            background: #56c080;
+        }
+
+        .toggle-checkbox:checked+.toggle-switch:before {
+            left: 30px;
+        }
+
+        .toggle-checkbox {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        .toggle-label {
+            margin-left: 5px;
+            position: relative;
+            top: 2px;
+        }
+    </style>
 @endpush
 
 @push('pluginJs')

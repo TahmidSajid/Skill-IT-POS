@@ -5,15 +5,22 @@ namespace App\Livewire\Enrollment;
 use App\Models\Courses;
 use App\Models\Students;
 use App\Models\User;
+use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
-use PhpParser\Node\Stmt\Return_;
 
 class Enrollment extends Component
 {
+    use WithPagination;
+
     public $search;
     public $studentSearch;
     public $candidates = [];
+    public $discount ;
+    public $courseInfo ;
+    public $installment ;
+    public $payment;
+    public $installmentPermit;
 
     public function render()
     {
@@ -27,10 +34,22 @@ class Enrollment extends Component
 
     #[Computed]
     public function students(){
-        return User::where('role','student')->where('name','LIKE',"%{$this->studentSearch}%")->get();
+        return User::where('role','student')->where('name','LIKE',"%{$this->studentSearch}%")->paginate(6);
+    }
+
+    public function enrollStart($info){
+        $this->courseInfo = $info;
+        $this->installmentPermit = false;
     }
 
     public function enroll(){
-        dd($this->candidates);
+        if($this->installment){
+            if ($this->courseInfo['discount_price']) {
+                $this->payment = $this->courseInfo['discount_price'] / $this->installment;
+            }
+            else{
+                $this->payment = $this->courseInfo['price'] / $this->installment;
+            }
+        }
     }
 }
