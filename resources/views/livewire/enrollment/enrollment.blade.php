@@ -60,6 +60,9 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             @include('components.dashboard.enrollment_student_list')
+                                            @php
+                                                print_r($candidates);
+                                            @endphp
                                         </div>
                                         <div class="col-lg-6">
                                             @include('components.dashboard.enrollment_form')
@@ -69,7 +72,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Enroll</button>
+                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Enroll</button>
                                     </form>
                                 </div>
                             </div>
