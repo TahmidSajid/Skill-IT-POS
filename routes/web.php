@@ -23,3 +23,4 @@ Route::get('/courses', [App\Http\Controllers\CoursesController::class, 'view'])-
 Route::get('/category', [App\Http\Controllers\CategoriesController::class, 'view'])->name('caterory');
 Route::get('/students', [App\Http\Controllers\StudentsController::class, 'view'])->name('students');
 Route::get('/enrollment', [App\Http\Controllers\EnrollmentsController::class, 'view'])->name('enroll');
+Route::get('/payments', [App\Http\Controllers\PaymentsController::class, 'view'])->name('payments');

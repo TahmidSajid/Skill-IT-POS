@@ -77,7 +77,7 @@
                     @endforelse
                     <tr>
                         <td colspan="5">
-                            {{ $this->categories->links() }}
+                            {{-- {{ $this->categories->links() }} --}}
                         </td>
                     </tr>
                 </tbody>

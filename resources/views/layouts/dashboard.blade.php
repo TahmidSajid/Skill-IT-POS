@@ -309,6 +309,14 @@
                                 </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('payments') }}">
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                                <span>
+                                    Payment Management
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
