@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-lg-4 offset-lg-8">
             <div class="input-group">
-                <input class="form-control border-end-0 border" type="search" wire:model.live="search"
-                    value="search" id="example-search-input" placeholder="search here....">
+                <input class="form-control border-end-0 border" type="search" wire:model.live="search" value="search"
+                    id="example-search-input" placeholder="search here....">
                 <span class="input-group-append bg-transparent">
                     <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                         type="button">
@@ -55,10 +55,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="me-3 confirm-text btn btn-sm btn-info text-white"
-                                                wire:click="delete({{ $student->id }})">
+                                            <a class="me-3 confirm-text btn btn-sm btn-info text-white"
+                                                href="{{ route('individual_payment',[$student->course_id,$student->getStudent]) }}">
                                                 Payment Management
-                                            </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
