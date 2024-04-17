@@ -82,7 +82,7 @@
                     <div class="form-group mt-4 mb-2">
                         <label>Discount Price</label>
                         <input type="number" class="form-control @error('discountPrice') is-invalid @enderror"
-                            wire:model="discountPrice" />
+                            wire:model.live="discountPrice" />
                     </div>
                     @error('discountPrice')
                         <p class="text-danger">{{ $message }}</p>

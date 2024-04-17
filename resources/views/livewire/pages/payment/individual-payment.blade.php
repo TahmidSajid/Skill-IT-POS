@@ -6,32 +6,37 @@
                     <h4>Details</h4>
                 </div>
                 <div class="card-body">
+                    <div class="text-center">
+                        <img src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}" style="height: 150px; width: 150px;" class="avatar-img rounded-circle text-center mx-auto" alt="" srcset="">
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">
                             <tbody>
                                 <tr>
                                     <td>
-                                        <h5>
-                                            Student Name :
-                                        </h5>
+                                        Student Name :
                                     </td>
                                     <td>{{ $student->name }}</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <p>
-                                            <b>Course Name :</b>
+                                            <b>Contact Number :</b>
                                         </p>
+                                    </td>
+                                    <td>{{ $student->phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Course Name :
                                     </td>
                                     <td>{{ $course->course_name }}</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h5>
-                                            Course Name :
-                                        </h5>
+                                        Total payment:
                                     </td>
-                                    <td>{{ $course->course_name }}</td>
+                                    <td>{{ $enrollments->payment }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,7 +57,7 @@
                     </div>
                     @if ($payment->status == 'unpaid')
                         <div class="dash-imgs">
-                            <button class="btn btn-success">Pay</button>
+                            <button class="btn btn-success" wire:click="pay({{ $payment->id }})">Pay</button>
                         </div>
                     @else
                         <h4>Paid</h4>
