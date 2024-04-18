@@ -22,6 +22,11 @@ class IndividualPayment extends Component
         Payments::where('id',$id)->update([
             'status' => 'paid',
         ]);
+        if(!Payments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->where('status','unpaid')->exists()){
+            Enrollments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->update([
+                'payment' => 'paid'
+            ]);
+        };
         notyf()->addSuccess('Your payment is complete');
     }
 }

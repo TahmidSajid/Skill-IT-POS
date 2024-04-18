@@ -96,99 +96,107 @@ class Enrollment extends Component
 
     public function enroll()
     {
+        $errorStudent = 0;
         foreach ($this->candidates as $key => $candidate) {
-            if ($this->installment) {
-                if ($this->courseInfo['discount_price']) {
-                    if ($this->discount) {
-                        $this->payment = ($this->courseInfo['discount_price'] - ($this->courseInfo['discount_price'] * ($this->discount / 100))) / $this->installment;
+            if(!Enrollments::where('user_id',$candidate)->where('course_id',$this->courseInfo['id'])->exists())
+            {
+                if ($this->installment) {
+                    if ($this->courseInfo['discount_price']) {
+                        if ($this->discount) {
+                            $this->payment = ($this->courseInfo['discount_price'] - ($this->courseInfo['discount_price'] * ($this->discount / 100))) / $this->installment;
+                        } else {
+                            $this->payment = $this->courseInfo['discount_price'] / $this->installment;
+                        }
+                        for ($x = 1; $x <= $this->installment; $x++) {
+                            Payments::insert([
+                                'user_id' => $candidate,
+                                'course_id' => $this->courseInfo['id'],
+                                'payment_system' => 'installment',
+                                'status' => 'unpaid',
+                                'payment' => $this->payment,
+                                'created_at' => Carbon::now(),
+                            ]);
+                        }
+                        Enrollments::insert([
+                            'user_id' => $candidate,
+                            'course_id' => $this->courseInfo['id'],
+                            'payment' => 'due',
+                            'created_at' => Carbon::now(),
+                        ]);
                     } else {
-                        $this->payment = $this->courseInfo['discount_price'] / $this->installment;
+                        if ($this->discount) {
+                            $this->payment = ($this->courseInfo['price'] - ($this->courseInfo['price'] * ($this->discount / 100))) / $this->installment;
+                        } else {
+                            $this->payment = $this->courseInfo['price'] / $this->installment;
+                        }
+                        for ($x = 1; $x <= $this->installment; $x++) {
+                            Payments::insert([
+                                'user_id' => $candidate,
+                                'course_id' => $this->courseInfo['id'],
+                                'payment_system' => 'installment',
+                                'status' => 'unpaid',
+                                'payment' => $this->payment,
+                                'created_at' => Carbon::now(),
+                            ]);
+                        }
+                        Enrollments::insert([
+                            'user_id' => $candidate,
+                            'course_id' => $this->courseInfo['id'],
+                            'payment' => 'due',
+                            'created_at' => Carbon::now(),
+                        ]);
                     }
-                    for ($x = 1; $x <= $this->installment; $x++) {
+                } else {
+                    if ($this->courseInfo['discount_price']) {
+                        if ($this->discount) {
+                            $this->payment = ($this->courseInfo['discount_price'] - ($this->courseInfo['discount_price'] * ($this->discount / 100)));
+                        } else {
+                            $this->payment = $this->courseInfo['discount_price'];
+                        }
                         Payments::insert([
                             'user_id' => $candidate,
                             'course_id' => $this->courseInfo['id'],
-                            'payment_system' => 'installment',
+                            'payment_system' => 'full-payment',
                             'status' => 'unpaid',
                             'payment' => $this->payment,
                             'created_at' => Carbon::now(),
                         ]);
-                    }
-                    Enrollments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment' => 'due',
-                        'created_at' => Carbon::now(),
-                    ]);
-                } else {
-                    if ($this->discount) {
-                        $this->payment = ($this->courseInfo['price'] - ($this->courseInfo['price'] * ($this->discount / 100))) / $this->installment;
+                        Enrollments::insert([
+                            'user_id' => $candidate,
+                            'course_id' => $this->courseInfo['id'],
+                            'payment' => 'due',
+                            'created_at' => Carbon::now(),
+                        ]);
                     } else {
-                        $this->payment = $this->courseInfo['price'] / $this->installment;
-                    }
-                    for ($x = 1; $x <= $this->installment; $x++) {
+                        if ($this->discount) {
+                            $this->payment = ($this->courseInfo['price'] - ($this->courseInfo['price'] * ($this->discount / 100)));
+                        } else {
+                            $this->payment = $this->courseInfo['price'];
+                        }
                         Payments::insert([
                             'user_id' => $candidate,
                             'course_id' => $this->courseInfo['id'],
-                            'payment_system' => 'installment',
+                            'payment_system' => 'full-payment',
                             'status' => 'unpaid',
                             'payment' => $this->payment,
                             'created_at' => Carbon::now(),
                         ]);
+                        Enrollments::insert([
+                            'user_id' => $candidate,
+                            'course_id' => $this->courseInfo['id'],
+                            'payment' => 'due',
+                            'created_at' => Carbon::now(),
+                        ]);
                     }
-                    Enrollments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment' => 'due',
-                        'created_at' => Carbon::now(),
-                    ]);
                 }
-            } else {
-                if ($this->courseInfo['discount_price']) {
-                    if ($this->discount) {
-                        $this->payment = ($this->courseInfo['discount_price'] - ($this->courseInfo['discount_price'] * ($this->discount / 100)));
-                    } else {
-                        $this->payment = $this->courseInfo['discount_price'];
-                    }
-                    Payments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment_system' => 'full-payment',
-                        'status' => 'unpaid',
-                        'payment' => $this->payment,
-                        'created_at' => Carbon::now(),
-                    ]);
-                    Enrollments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment' => 'due',
-                        'created_at' => Carbon::now(),
-                    ]);
-                } else {
-                    if ($this->discount) {
-                        $this->payment = ($this->courseInfo['price'] - ($this->courseInfo['price'] * ($this->discount / 100)));
-                    } else {
-                        $this->payment = $this->courseInfo['price'];
-                    }
-                    Payments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment_system' => 'full-payment',
-                        'status' => 'unpaid',
-                        'payment' => $this->payment,
-                        'created_at' => Carbon::now(),
-                    ]);
-                    Enrollments::insert([
-                        'user_id' => $candidate,
-                        'course_id' => $this->courseInfo['id'],
-                        'payment' => 'due',
-                        'created_at' => Carbon::now(),
-                    ]);
-                }
+                $this->payment = 0;
+                notyf()->addSuccess('Enrollment complete');
             }
-            $this->payment = 0;
+            else{
+                $errorStudent++ ;
+                notyf()->addWarning($errorStudent." "."student already enrolled");
+            }
         }
         $this->reset();
-        notyf()->addSuccess('Enrollment complete');
     }
 }

@@ -63,6 +63,11 @@ class AddCourse extends Component
          *
          * The create() method on the Courses model persists the new course record to the database.
          */
+
+        if($this->discountPrice == ''){
+            $this->discountPrice = null;
+        }
+
         $data = [
             'course_name' => $this->courseName,
             'category_id' => $this->categoryId,
