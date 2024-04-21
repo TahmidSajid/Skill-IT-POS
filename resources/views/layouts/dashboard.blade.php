@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/plugins/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/style.css">
     @stack('pluginCss')
+    @stack('customeCss')
     @stack('paginationCss')
 </head>
 
@@ -320,15 +321,33 @@
                                 </a>
                             </li>
                         @endif
+                        @if (auth()->user()->role == 'student')
+                            <li>
+                                <a href="{{ route('student_dashboard') }}">
+                                    <i class="fa-solid fa-gauge"></i>
+                                    <span>
+                                        Student Dashboard
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('student_profile') }}">
+                                    <i class="fa-solid fa-address-card"></i>
+                                    <span>
+                                        Student Profile
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('enrolled_courses') }}">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                    <span>
+                                        Enrolled Courses
+                                    </span>
+                                </a>
+                            </li>
 
-                        <li>
-                            <a href="{{ route('student_dashboard') }}">
-                                <i class="fa-solid fa-gauge"></i>
-                                <span>
-                                    Student Dashboard
-                                </span>
-                            </a>
-                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
