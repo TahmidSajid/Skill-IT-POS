@@ -40,7 +40,9 @@ Route::get('/payments/individual/{courseId}/{studentId}', [App\Http\Controllers\
 
 
 Route::get('/student/login', [App\Http\Controllers\StudentLoginController::class, 'student_login_page'])->name('student_login_page');
+Route::get('/student/logout', [App\Http\Controllers\StudentLoginController::class, 'student_logout'])->name('student_logout');
 Route::post('/student/login/form', [App\Http\Controllers\StudentLoginController::class, 'student_login'])->name('student_login');
 Route::get('/student/dashboard/page', [App\Http\Controllers\StudentDashboardController::class, 'student_dashboard'])->name('student_dashboard');
 Route::get('/student/profile/page', [App\Http\Controllers\StudentProfileController::class, 'student_profile'])->name('student_profile');
 Route::get('/student/enrolled/courses', [App\Http\Controllers\EnrolledCoursesController::class, 'enrolled_courses'])->name('enrolled_courses');
+Route::get('/student/enrolled/details/{enrollment_id}', [App\Http\Controllers\EnrolledDetailsController::class, 'enrolled_details'])->name('enrolled_details');

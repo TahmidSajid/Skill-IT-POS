@@ -28,4 +28,9 @@ class StudentLoginController extends Controller
             return back()->with('credi_error','credential doesnot match');
         }
     }
+    public function student_logout()
+    {
+        Auth::logout();
+        return redirect(route('student_login_page'));
+    }
 }
