@@ -97,7 +97,7 @@
                         </div>
                     </li>
                 @else
-                <a href="{{ route('student_logout') }}" class="btn btn-danger my-2">Logout</a>
+                    <a href="{{ route('student_logout') }}" class="btn btn-danger my-2">Logout</a>
                 @endif
             </ul>
 
@@ -120,15 +120,17 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
 
-                        @if (auth()->user()->role == 'admin')
-                            <li class="active">
-                                <a href="{{ route('home') }}">
-                                    <i class="fa-solid fa-gauge"></i>
-                                    <span>
-                                        Dashboard
-                                    </span>
-                                </a>
-                            </li>
+                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
+                            @if (auth()->user()->role == 'admin')
+                                <li class="active">
+                                    <a href="{{ route('home') }}">
+                                        <i class="fa-solid fa-gauge"></i>
+                                        <span>
+                                            Dashboard
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ route('profile') }}">
                                     <i class="fa-solid fa-user"></i>
@@ -137,17 +139,19 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="submenu">
-                                <a href="javascript:void(0);">
-                                    <i class="fa-solid fa-book-open-reader"></i>
-                                    <span> Course</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <ul>
-                                    <li><a href="{{ route('caterory') }}">Category</a></li>
-                                    <li><a href="{{ route('courses') }}">Course</a></li>
-                                </ul>
-                            </li>
+                            @if (auth()->user()->role == 'admin')
+                                <li class="submenu">
+                                    <a href="javascript:void(0);">
+                                        <i class="fa-solid fa-book-open-reader"></i>
+                                        <span> Course</span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul>
+                                        <li><a href="{{ route('caterory') }}">Category</a></li>
+                                        <li><a href="{{ route('courses') }}">Course</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                             <li class="submenu">
                                 <a href="javascript:void(0);">
                                     <i class="fa-solid fa-users"></i>
@@ -155,7 +159,9 @@
                                     <span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="{{ route('students') }}">Students</a></li>
-                                    {{-- <li><a href="{{ route('courses') }}">Course</a></li> --}}
+                                    @if (auth()->user()->role == 'admin')
+                                        <li><a href="{{ route('moderator.index') }}">Moderators</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             <li>
@@ -166,14 +172,16 @@
                                     </span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('payments') }}">
-                                    <i class="fa-solid fa-money-bill-wave"></i>
-                                    <span>
-                                        Payment Management
-                                    </span>
-                                </a>
-                            </li>
+                            @if (auth()->user()->role == 'admin')
+                                <li>
+                                    <a href="{{ route('payments') }}">
+                                        <i class="fa-solid fa-money-bill-wave"></i>
+                                        <span>
+                                            Payment Management
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
                         @endif
                         @if (auth()->user()->role == 'student')
                             <li>

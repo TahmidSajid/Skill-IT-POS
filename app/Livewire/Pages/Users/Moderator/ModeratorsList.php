@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Livewire\Pages\Users\Students;
+namespace App\Livewire\Pages\Users\Moderator;
 
-use App\Models\User;
-use Livewire\Attributes\Computed;
+use Livewire\Attributes\Validate;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
-class StudentsList extends Component
+class ModeratorsList extends Component
 {
     use WithFileUploads;
 
@@ -21,24 +21,29 @@ class StudentsList extends Component
     public $currentPhoto ;
     public $newPhoto ;
 
+    public function render()
+    {
+        return view('livewire.pages.users.moderator.moderators-list');
+    }
+
     #[On('reloading')]
     public function recheck(){
-        unset($this->students);
+        unset($this->moderators);
     }
 
     #[Computed]
-    public function students(){
-        return User::where('role','student')->get();
+    public function moderators()
+    {
+        return User::where('role','moderator')->get();
     }
 
     public function edit($id){
-        $studentInfo = User::where('id',$id)->first();
-        $this->name = $studentInfo->name;
-        $this->email = $studentInfo->email;
-        $this->phone = $studentInfo->phone;
-        $this->currentPhoto = $studentInfo->photo;
+        $mode_Info = User::where('id',$id)->first();
+        $this->name = $mode_Info->name;
+        $this->email = $mode_Info->email;
+        $this->phone = $mode_Info->phone;
+        $this->currentPhoto = $mode_Info->photo;
     }
-
     public function update($id){
         $this->validate();
 
@@ -51,34 +56,28 @@ class StudentsList extends Component
 
         if($this->newPhoto){
             if($this->currentPhoto){
-                unlink('uploads/student_photos/'.$this->currentPhoto);
+                unlink('uploads/profile_photos/'.$this->currentPhoto);
             }
             $Image = new ImageManager(new Driver());
             $new_name = Str::random(5) . time() . "." . $this->newPhoto->getClientOriginalExtension();
             $image = $Image->read($this->newPhoto)->resize(540, 540);
-            $image->save(('uploads/student_photos/' . $new_name), quality: 80);
+            $image->save(('uploads/profile_photos/' . $new_name), quality: 80);
             User::where('id',$id)->update([
                 'photo' => $new_name,
             ]);
         };
 
         $this->dispatch('reloading');
-        notyf()->addSuccess('Student updated');
+        notyf()->addSuccess('Moderator updated');
         $this->reset();
     }
-
 
     public function delete($id){
         $studentInfo = User::where('id',$id)->first();
         if($studentInfo->photo){
-            unlink('uploads/student_photos/'.$studentInfo->photo);
+            unlink('uploads/profile_photos/'.$studentInfo->photo);
         };
         User::where('id',$id)->delete();
-        notyf()->addError('Student deleted');
-    }
-
-    public function render()
-    {
-        return view('livewire.pages.users.students.students-list');
+        notyf()->addError('Moderator deleted');
     }
 }

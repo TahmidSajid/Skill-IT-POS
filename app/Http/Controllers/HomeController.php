@@ -27,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->role != 'admin') {
+            return redirect(route('profile'));
+        }
         $costs = Courses::select('cost')->get();
         $total_cost = 0;
         foreach ($costs as $key => $cost) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ModeratorsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +40,15 @@ Route::get('/payments/individual/{courseId}/{studentId}', [App\Http\Controllers\
 
 
 
+/**
+ * Define the routes for student-related functionality in the application.
+ *
+ * These routes provide access to the student login and logout pages, the student login form,
+ * the student dashboard, the student profile page, the list of enrolled courses, and the
+ * details of a specific enrolled course.
+ *
+ * @return void
+ */
 Route::get('/student/login', [App\Http\Controllers\StudentLoginController::class, 'student_login_page'])->name('student_login_page');
 Route::get('/student/logout', [App\Http\Controllers\StudentLoginController::class, 'student_logout'])->name('student_logout');
 Route::post('/student/login/form', [App\Http\Controllers\StudentLoginController::class, 'student_login'])->name('student_login');
@@ -46,3 +56,6 @@ Route::get('/student/dashboard/page', [App\Http\Controllers\StudentDashboardCont
 Route::get('/student/profile/page', [App\Http\Controllers\StudentProfileController::class, 'student_profile'])->name('student_profile');
 Route::get('/student/enrolled/courses', [App\Http\Controllers\EnrolledCoursesController::class, 'enrolled_courses'])->name('enrolled_courses');
 Route::get('/student/enrolled/details/{enrollment_id}', [App\Http\Controllers\EnrolledDetailsController::class, 'enrolled_details'])->name('enrolled_details');
+
+
+Route::resource('moderator',ModeratorsController::class);

@@ -3,11 +3,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Student Edit</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Moderator Edit</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form wire:submit="update({{ $student->id }})">
+                <form wire:submit="update({{ $moderator->id }})">
                     <div class="col-lg-12 col-sm-12 col-12">
                         <div class="form-group">
                             <label>Name</label>
@@ -27,12 +27,13 @@
                     <div class="col-lg-12 col-sm-12 col-12">
                         <div class="form-group">
                             <label>Current Profile Picture</label>
-                            @if ($student->photo)
-                                <img class="img-fluid" src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}"
-                                    alt="img" style="height:150px; width:150px;">
+                            @if ($moderator->photo)
+                                <img class="img-fluid"
+                                    src="{{ asset('uploads/profile_photos') }}/{{ $moderator->photo }}" alt="img"
+                                    style="height:150px; width:150px;">
                             @else
                                 <img class="img-fluid" src="{{ asset('default_photos/default_profile.png') }}"
-                                    alt="img"style="height:150px; width:150px;">
+                                    alt="img" style="height:150px; width:150px;">
                             @endif
                         </div>
                     </div>
