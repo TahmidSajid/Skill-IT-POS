@@ -11,7 +11,7 @@
                             src="{{ asset('uploads/student_photos') }}/{{ auth()->user()->photo }}" alt>
                     @else
                         <img class="img-account-profile rounded-circle mb-2"
-                            src="{{ asset('assets/img/profiles/avator1.jpg') }}" alt>
+                            src="{{ asset('default_photos/default_profile.png') }}" alt>
                     @endif
 
                     <form wire:submit="profileImage">

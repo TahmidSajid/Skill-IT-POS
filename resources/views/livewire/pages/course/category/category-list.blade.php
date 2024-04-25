@@ -4,12 +4,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Category name</th>
                         <th>Category tag</th>
                         <th>Description</th>
@@ -19,12 +13,6 @@
                 <tbody>
                     @foreach ($this->categories as $key => $category)
                         <tr>
-                            <td>
-                                <label class="checkboxs">
-                                    <input type="checkbox">
-                                    <span class="checkmarks"></span>
-                                </label>
-                            </td>
                             <td class="productimgname">
                                 <a href="javascript:void(0);" class="product-img">
                                     <img src="{{ asset('uploads/category_photos') }}/{{ $category->category_photo }}"
@@ -65,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if (!App\Models\Courses::where('category_id', $category->id)->exists())
+                                @if (!App\Models\Courses::where('category_id', $category->id)->exists() && !App\Models\Subcategory::where('subcategory_id', $category->id)->exists())
                                     <button style="background: none; border:0px" class="me-3"
                                         wire:click="delete({{ $category->id }})">
                                         <img src="assets/img/icons/delete.svg" alt="img">

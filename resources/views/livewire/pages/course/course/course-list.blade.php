@@ -4,12 +4,6 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>
-                            <label class="checkboxs">
-                                <input type="checkbox" id="select-all">
-                                <span class="checkmarks"></span>
-                            </label>
-                        </th>
                         <th>Course name</th>
                         <th>Category</th>
                         <th>Sub-Category</th>
@@ -24,12 +18,6 @@
                 <tbody>
                     @foreach ($this->courses as $key => $course)
                         <tr>
-                            <td>
-                                <label class="checkboxs">
-                                    <input type="checkbox">
-                                    <span class="checkmarks"></span>
-                                </label>
-                            </td>
                             <td class="productimgname">
                                 <a href="javascript:void(0);" class="product-img">
                                     <img src="{{ asset('uploads/course_photos') }}/{{ $course->course_image }}"

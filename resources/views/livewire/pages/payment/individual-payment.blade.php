@@ -7,7 +7,15 @@
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}" style="height: 150px; width: 150px;" class="avatar-img rounded-circle text-center mx-auto" alt="" srcset="">
+                        @if ($student->photo)
+                            <img src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}"
+                                style="height: 150px; width: 150px;" class="avatar-img rounded-circle text-center mx-auto"
+                                alt="" srcset="">
+                        @else
+                            <img src="{{ asset('default_photos/default_profile.png') }}"
+                                style="height: 150px; width: 150px;"
+                                class="avatar-img rounded-circle text-center mx-auto" alt="" srcset="">
+                        @endif
                     </div>
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">

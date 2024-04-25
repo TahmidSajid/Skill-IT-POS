@@ -33,12 +33,13 @@
                                     <tr>
                                         <td class="d-flex align-items-center">
                                             <div class="productimgname" wire:ignore>
-                                                <a href="{{ asset('uploads/student_photos') }}/{{ $student->getStudent->photo }}"
-                                                    class="product-img image-popup">
-                                                    <img class="img-fluid"
-                                                        src="{{ asset('uploads/student_photos') }}/{{ $student->getStudent->photo }}"
-                                                        alt="product">
-                                                </a>
+                                                @if ($student->getStudent->photo)
+                                                    <img style="height: 50px; width:50px;" src="{{ asset('uploads/student_photos') }}/{{ $student->getStudent->photo }}"
+                                                        alt="">
+                                                @else
+                                                    <img style="height: 50px; width:50px;" src="{{ asset('default_photos/default_profile.png') }}"
+                                                        alt="">
+                                                @endif
                                                 {{ $student->getStudent->name }}
                                             </div>
                                         </td>

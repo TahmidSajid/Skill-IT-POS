@@ -29,8 +29,13 @@
                             wire:model.live="candidates" type="checkbox"
                             value="{{ $student->id }}">
                         <a class="product-img" class="mx-2">
+                            @if ($student->photo )
                             <img src="{{ asset('uploads/student_photos') }}/{{ $student->photo }}"
                                 alt="">
+                            @else
+                            <img src="{{ asset('default_photos/default_profile.png') }}"
+                                alt="">
+                            @endif
                         </a>
                         <a href=""
                             class="mx-2">{{ $student->name }}</a>

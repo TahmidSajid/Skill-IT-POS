@@ -62,9 +62,6 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 @include('components.dashboard.enrollment_student_list')
-                                                @php
-                                                    print_r($candidates);
-                                                @endphp
                                             </div>
                                             <div class="col-lg-6">
                                                 @include('components.dashboard.enrollment_form')

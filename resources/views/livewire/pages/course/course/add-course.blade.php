@@ -124,7 +124,6 @@
             </form>
         </div>
     </div>
-    {{ $discountPrice }}
 </div>
 @push('customeJS')
     <script src="{{ asset('assets') }}/plugins/select2/js/select2.min.js" type="text/javascript"></script>

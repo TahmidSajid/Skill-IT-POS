@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+
+
 /**
  * Define the routes for the application.
  *

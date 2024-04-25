@@ -6,8 +6,13 @@
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
-                            <img src="{{ asset('uploads/student_photos') }}/{{ auth()->user()->photo }}" alt="avatar"
-                                class="rounded-circle img-fluid" style="width: 150px" />
+                            @if (auth()->user()->photo)
+                                <img src="{{ asset('uploads/student_photos') }}/{{ auth()->user()->photo }}" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px" />
+                            @else
+                            <img src="{{ asset('default_photos/default_profile.png') }}" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px" />
+                            @endif
                             <h5 class="my-3">{{ auth()->user()->name }}</h5>
                             <p class="text-muted mb-1">{{ auth()->user()->role }}</p>
                         </div>
