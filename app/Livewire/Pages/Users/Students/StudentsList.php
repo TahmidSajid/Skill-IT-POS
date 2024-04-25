@@ -11,9 +11,11 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class StudentsList extends Component
 {
+    use WithPagination;
     use WithFileUploads;
 
     #[Validate('required')]
@@ -28,7 +30,7 @@ class StudentsList extends Component
 
     #[Computed]
     public function students(){
-        return User::where('role','student')->get();
+        return User::where('role','student')->paginate(5);
     }
 
     public function edit($id){

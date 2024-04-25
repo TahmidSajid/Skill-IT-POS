@@ -65,10 +65,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button style="background: none; border:0px" class="me-3"
-                                    wire:click="delete({{ $category->id }})">
-                                    <img src="assets/img/icons/delete.svg" alt="img">
-                                </button>
+                                @if (!App\Models\Courses::where('category_id', $category->id)->exists())
+                                    <button style="background: none; border:0px" class="me-3"
+                                        wire:click="delete({{ $category->id }})">
+                                        <img src="assets/img/icons/delete.svg" alt="img">
+                                    </button>
+                                    @else
+                                    <p class="text-warning">In use</p>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -11,10 +11,12 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class ModeratorsList extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     #[Validate('required')]
     public $name, $email , $phone ;
@@ -34,7 +36,7 @@ class ModeratorsList extends Component
     #[Computed]
     public function moderators()
     {
-        return User::where('role','moderator')->get();
+        return User::where('role','moderator')->paginate(7);
     }
 
     public function edit($id){

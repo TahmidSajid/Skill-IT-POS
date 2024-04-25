@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Enrollments;
 use App\Models\Payments;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class EnrolledCoursesController extends Controller
 {
     public function enrolled_courses()
     {
+        if (!Auth::check()) {
+            return redirect(route('student_login_page'));
+        }
         $total_payments = Payments::where('user_id',auth()->user()->id)->count();
         $complete_payments = Payments::where('user_id',auth()->user()->id)->where('status','paid')->count();
         $enrollments = Enrollments::where('user_id',auth()->user()->id)->get();

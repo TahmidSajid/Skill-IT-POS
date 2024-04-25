@@ -39,22 +39,22 @@
                             </td>
                             <td>{{ $course->getCategory->category_tag }}</td>
                             @php
-                                $subCate = App\Models\Subcategory::where('course_id',$course->id)->get();
+                                $subCate = App\Models\Subcategory::where('course_id', $course->id)->get();
                             @endphp
                             <td>
-                                @foreach ( $subCate as $x)
+                                @foreach ($subCate as $x)
                                     {{ $x->getCategoryName->category_tag }} <br>
                                 @endforeach
                             </td>
-                            <td>{{ Str::limit($course->description, 10, '...')  }}</td>
+                            <td>{{ Str::limit($course->description, 10, '...') }}</td>
                             <td>{{ $course->cost }}</td>
                             <td>{{ $course->price }}</td>
                             <td>{{ $course->discount_price }}</td>
                             <td>
                                 @if ($course->status == 'open')
-                                <span class="badges bg-lightgreen">{{ $course->status }}</span>
+                                    <span class="badges bg-lightgreen">{{ $course->status }}</span>
                                 @else
-                                <span class="badges bg-lightred">{{ $course->status }}</span>
+                                    <span class="badges bg-lightred">{{ $course->status }}</span>
                                 @endif
                             </td>
                             <td>
@@ -90,10 +90,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button style="background: none; border:0px" class="me-3"
-                                    wire:click="delete({{ $course->id }})">
-                                    <img src="assets/img/icons/delete.svg" alt="img">
-                                </button>
+                                @if (!App\Models\Enrollments::where('course_id', $course->id)->exists())
+                                    <button style="background: none; border:0px" class="me-3"
+                                        wire:click="delete({{ $course->id }})">
+                                        <img src="assets/img/icons/delete.svg" alt="img">
+                                    </button>
+                                @else
+                                <p class="text-warning">In use</p>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

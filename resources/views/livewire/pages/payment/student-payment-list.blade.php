@@ -23,7 +23,9 @@
                                     <th>Phone</th>
                                     <th>Course Name</th>
                                     <th>Payment</th>
-                                    <th>Action</th>
+                                    @if (auth()->user()->role == 'admin')
+                                        <th>Action</th>
+                                    @endIf
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,28 +51,32 @@
                                                 <span class="bg-lightgreen badges">{{ $student->payment }}</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <a class="me-3 confirm-text btn btn-sm btn-info text-white"
-                                                        href="{{ route('individual_payment', [$student->course_id, $student->getStudent]) }}">
-                                                        Payment Management
-                                                    </a>
+                                        @if (auth()->user()->role == 'admin')
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <a class="me-3 confirm-text btn btn-sm btn-info text-white"
+                                                            href="{{ route('individual_payment', [$student->course_id, $student->getStudent]) }}">
+                                                            Payment Management
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <button
+                                                            class="me-3 confirm-text btn btn-sm btn-danger text-white"
+                                                            wire:click="expel({{ $student->id }})">
+                                                            Expel
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <button class="me-3 confirm-text btn btn-sm btn-danger text-white" wire:click="expel({{ $student->id }})">
-                                                        Expel
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">
-                                        <h4>None Enrolled Yet</h4>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <h4>Nothing</h4>
+                                        </td>
+                                    </tr>
                                 @endforelse
                                 <tr>
                                     <td colspan="5">

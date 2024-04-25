@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Moderators;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ModeratorsController extends Controller
@@ -12,6 +13,9 @@ class ModeratorsController extends Controller
      */
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect(route('login'));
+        }
         return view('moderators');
     }
 
@@ -34,7 +38,7 @@ class ModeratorsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Moderators $moderators)
+    public function show()
     {
         //
     }
@@ -42,7 +46,7 @@ class ModeratorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Moderators $moderators)
+    public function edit()
     {
         //
     }
@@ -50,7 +54,7 @@ class ModeratorsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Moderators $moderators)
+    public function update()
     {
         //
     }
@@ -58,7 +62,7 @@ class ModeratorsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Moderators $moderators)
+    public function destroy()
     {
         //
     }

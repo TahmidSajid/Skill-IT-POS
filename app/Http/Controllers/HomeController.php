@@ -7,6 +7,7 @@ use App\Models\Courses;
 use App\Models\Enrollments;
 use App\Models\Payments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect(route('login'));
+        }
+
         if (auth()->user()->role != 'admin') {
             return redirect(route('profile'));
         }

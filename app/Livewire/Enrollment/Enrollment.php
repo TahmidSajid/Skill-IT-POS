@@ -34,7 +34,7 @@ class Enrollment extends Component
     #[Computed]
     public function courses()
     {
-        return Courses::where('course_name', 'LIKE', "%{$this->search}%")->get();
+        return Courses::where('course_name', 'LIKE', "%{$this->search}%")->where('status','open')->get();
     }
 
     #[Computed]

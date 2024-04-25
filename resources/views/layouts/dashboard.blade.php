@@ -59,30 +59,42 @@
             </a>
 
             <ul class="nav user-menu">
-                @if (auth()->user()->role == 'admin')
+                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="javascript:void(0);" class="dropdown-toggle nav-link userset"
                             data-bs-toggle="dropdown">
-                            <span class="user-img"><img src="{{ asset('assets') }}/img/profiles/avator1.jpg"
-                                    alt="">
-                                <span class="status online"></span></span>
+                            <span class="user-img">
+                                @if (auth()->user()->photo)
+                                    <img src="{{ asset('uploads/profile_photos') }}/{{ auth()->user()->photo }}"
+                                        alt="img">
+                                @else
+                                    <img src="{{ asset('default_photos/default_profile.png') }}" alt="img">
+                                @endif
+                                <span class="status online"></span>
+                            </span>
                         </a>
                         <div class="dropdown-menu menu-drop-user">
                             <div class="profilename">
                                 <div class="profileset">
-                                    <span class="user-img"><img src="{{ asset('assets') }}/img/profiles/avator1.jpg"
-                                            alt="">
-                                        <span class="status online"></span></span>
+                                    <span class="user-img">
+                                        @if (auth()->user()->photo)
+                                            <img src="{{ asset('uploads/profile_photos') }}/{{ auth()->user()->photo }}"
+                                                alt="img">
+                                        @else
+                                            <img src="{{ asset('default_photos/default_profile.png') }}"
+                                                alt="img">
+                                        @endif
+                                        <span class="status online"></span>
+                                    </span>
                                     <div class="profilesets">
-                                        <h6>John Doe</h6>
-                                        <h5>Admin</h5>
+                                        <h6>{{ auth()->user()->name }}</h6>
+                                        <h5>{{ auth()->user()->role }}</h5>
                                     </div>
                                 </div>
                                 <hr class="m-0">
-                                <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i>
+                                <a class="dropdown-item" href="{{ route('profile') }}"> <i class="me-2"
+                                        data-feather="user"></i>
                                     My Profile</a>
-                                <a class="dropdown-item" href="generalsettings.html"><i class="me-2"
-                                        data-feather="settings"></i>Settings</a>
                                 <hr class="m-0">
                                 <a class="dropdown-item logout pb-0" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -172,16 +184,20 @@
                                     </span>
                                 </a>
                             </li>
-                            @if (auth()->user()->role == 'admin')
-                                <li>
-                                    <a href="{{ route('payments') }}">
-                                        <i class="fa-solid fa-money-bill-wave"></i>
+                            <li>
+                                <a href="{{ route('payments') }}">
+                                    <i class="fa-solid fa-money-bill-wave"></i>
+                                    @if (auth()->user()->role == 'admin')
                                         <span>
                                             Payment Management
                                         </span>
-                                    </a>
-                                </li>
-                            @endif
+                                    @else
+                                        <span>
+                                            Enrollment List
+                                        </span>
+                                    @endif
+                                </a>
+                            </li>
                         @endif
                         @if (auth()->user()->role == 'student')
                             <li>

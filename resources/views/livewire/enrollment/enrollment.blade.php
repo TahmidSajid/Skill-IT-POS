@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row py-4">
-        @foreach ($this->courses as $key => $course)
+        @forelse ($this->courses as $key => $course)
             <div class="col-lg-4">
                 <div class="card flex-fill bg-white">
                     <img alt="Card Image" src="{{ asset('uploads/course_photos') }}/{{ $course->course_image }}"
@@ -44,7 +44,8 @@
                     </div>
                     <div class="card-footer text-center">
                         <button class="btn btn-submit" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal{{ $key }}" wire:click="enrollStart({{ $course }})">Enroll</button>
+                            data-bs-target="#exampleModal{{ $key }}"
+                            wire:click="enrollStart({{ $course }})">Enroll</button>
                     </div>
                     <div class="modal fade" id="exampleModal{{ $key }}" tabindex="-1"
                         aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
@@ -53,27 +54,28 @@
                                 <div class="modal-header">
                                     <span style="margin-right: 10px">Course Name:</span>
                                     <h5 class="modal-title" id="exampleModalLabel">{{ $course->course_name }}</h5>
-                                    <button type="button" style="color:black !important" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                    <button type="button" style="color:black !important" class="btn-close"
+                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form wire:submit="enroll">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            @include('components.dashboard.enrollment_student_list')
-                                            @php
-                                                print_r($candidates);
-                                            @endphp
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                @include('components.dashboard.enrollment_student_list')
+                                                @php
+                                                    print_r($candidates);
+                                                @endphp
+                                            </div>
+                                            <div class="col-lg-6">
+                                                @include('components.dashboard.enrollment_form')
+                                            </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            @include('components.dashboard.enrollment_form')
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Enroll</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        data-bs-dismiss="modal">Enroll</button>
                                     </form>
                                 </div>
                             </div>
@@ -81,7 +83,9 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <h5 class="text-center">Nothing found</h5>
+        @endforelse
     </div>
 </div>
 

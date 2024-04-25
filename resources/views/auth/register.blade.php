@@ -80,7 +80,7 @@
                                 <label>Confirm Password</label>
                                 <div class="pass-group">
                                     <input type="password" class="pass-input" placeholder="Enter your password"
-                                    name="password_confirmation">
+                                        name="password_confirmation">
                                     <span class="fas toggle-password fa-eye-slash"></span>
                                 </div>
                                 @error('password_confirmation')
@@ -92,6 +92,11 @@
                             <div class="form-login">
                                 <button type="submit" class="btn btn-login">Sign Up</button>
                             </div>
+                            @if (session('admin_error'))
+                                <div class="form-login">
+                                    <p class="text-danger">{{ session('admin_error') }}</p>
+                                </div>
+                            @endif
                         </form>
                         <div class="signinform text-center">
                             <h4>Already a user? <a href="{{ route('login') }}" class="hover-a">Sign In</a></h4>

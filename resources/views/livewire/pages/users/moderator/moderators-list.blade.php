@@ -57,7 +57,7 @@
                     @endforelse
                     <tr>
                         <td colspan="5">
-                            {{-- {{ $this->categories->links() }} --}}
+                            {{ $this->moderators->links() }}
                         </td>
                     </tr>
                 </tbody>
@@ -72,4 +72,24 @@
 @push('pluginJs')
     <script src="{{ asset('assets') }}/plugins/lightbox/glightbox.min.js" type="text/javascript"></script>
     <script src="{{ asset('assets') }}/plugins/lightbox/lightbox.js" type="text/javascript"></script>
+@endpush
+@push('paginationCss')
+    <style rel="stylesheet">
+        .pagination {
+            color: white !important;
+        }
+
+        .page-link {
+            color: white !important;
+            background: #868484 !important;
+        }
+
+        .page-item.active .page-link {
+            border: 0px !important;
+            color: black !important;
+            background: #ff9f43 !important;
+            transform: scale(1.2);
+            transition: 0.5s
+        }
+    </style>
 @endpush
