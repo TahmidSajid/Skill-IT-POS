@@ -1,4 +1,9 @@
 @extends('layouts.dashboard')
 @section('content')
-    <livewire:enrollment.enrollment/>
+    <div class="page-header">
+        <div class="page-title">
+            <h4>Enrollment</h4>
+        </div>
+    </div>
+    <livewire:enrollment.enrollment />
 @endsection

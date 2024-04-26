@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Pages\Users\Moderator;
 
+use App\Mail\moderator_mail;
 use Livewire\Attributes\Validate;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\Component;
 
@@ -48,7 +50,7 @@ class AddModerator extends Component
             ]);
         };
 
-        // Mail::to($this->email)->send(new student_account($this->name,$this->email,$password));
+        Mail::to($this->email)->send(new moderator_mail($this->name,$this->email,$password));
 
         $this->dispatch('reloading');
         notyf()->addSuccess('Moderator added successfuly');

@@ -4,8 +4,7 @@
         <div class="col-lg-12">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>User Management</h4>
-                    <h6>Student</h6>
+                    <h4>Student</h4>
                 </div>
             </div>
         </div>

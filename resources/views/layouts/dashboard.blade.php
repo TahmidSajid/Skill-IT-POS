@@ -42,10 +42,10 @@
         <div class="header">
 
             <div class="header-left active">
-                <a href="index.html" class="logo">
+                <a href="#" class="logo">
                     <img src="{{ asset('assets') }}/img/logo.png" alt="">
                 </a>
-                <a href="index.html" class="logo-small">
+                <a href="#" class="logo-small">
                     <img src="{{ asset('assets') }}/img/logo-small.png" alt="">
                 </a>
             </div>
@@ -134,7 +134,7 @@
 
                         @if (auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
                             @if (auth()->user()->role == 'admin')
-                                <li class="active">
+                                <li class="">
                                     <a href="{{ route('home') }}">
                                         <i class="fa-solid fa-gauge"></i>
                                         <span>

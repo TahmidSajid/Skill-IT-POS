@@ -145,7 +145,7 @@
                                             <strong class="st2">Password</strong>{{ $password }}
                                         </p>
 
-                                        <a href="{{ route('student_login_page') }}" class="logo">
+                                        <a href="{{ route('login') }}" class="logo">
                                             Login to your Account
                                         </a>
                                     </td>
@@ -170,3 +170,4 @@
 </body>
 
 </html>
+

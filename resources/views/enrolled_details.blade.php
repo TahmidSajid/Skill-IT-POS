@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="page-title">
+        <h4>Enrollment Details</h4>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">

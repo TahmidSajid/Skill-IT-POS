@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="page-title">
+        <h4>Student Dashboard</h4>
+    </div>
     <section>
         <div class="container py-5">
             <div class="row">
@@ -10,7 +13,7 @@
                                 <img src="{{ asset('uploads/student_photos') }}/{{ auth()->user()->photo }}" alt="avatar"
                                     class="rounded-circle img-fluid" style="width: 150px" />
                             @else
-                            <img src="{{ asset('default_photos/default_profile.png') }}" alt="avatar"
+                                <img src="{{ asset('default_photos/default_profile.png') }}" alt="avatar"
                                     class="rounded-circle img-fluid" style="width: 150px" />
                             @endif
                             <h5 class="my-3">{{ auth()->user()->name }}</h5>

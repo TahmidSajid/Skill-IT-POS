@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
+    <div class="page-title">
+        <h4>Student Profile</h4>
+    </div>
     <livewire:pages.student.student-profile>
 @endsection
 @push('customeCss')
