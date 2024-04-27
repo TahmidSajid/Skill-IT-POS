@@ -25,32 +25,52 @@
                                 @else
                                     <a href="{{ asset('default_photos/default_profile.png') }}"
                                         class="product-img image-popup">
-                                        <img class="img-fluid"
-                                            src="{{ asset('default_photos/default_profile.png') }}"
+                                        <img class="img-fluid" src="{{ asset('default_photos/default_profile.png') }}"
                                             alt="img">
                                     </a>
                                 @endif
                                 {{ $moderator->name }}
                             </td>
-                            <td>{{ $moderator->phone }}</td>
+                            <td>
+                                @if ($moderator->phone)
+                                    {{ $moderator->phone }}
+                                @else
+                                    <span>Not added yet</span>
+                                @endif
+                            </td>
                             <td>{{ $moderator->email }}</td>
                             <td>{{ $moderator->role }}</td>
                             <td>
-                                <button class="me-3 bg-transparent border-0" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal{{ $key }}"
-                                    wire:click="edit({{ $moderator->id }})">
-                                    <img src="assets/img/icons/edit.svg" alt="img">
-                                </button>
-                                <!-- Modal -->
-                                <!-- student edit form start
+                                @if (auth()->user()->id != $moderator->id && $loop->iteration != 1)
+                                    <button class="me-3 bg-transparent border-0" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal{{ $key }}"
+                                        wire:click="edit({{ $moderator->id }})">
+                                        <img src="assets/img/icons/edit.svg" alt="img">
+                                    </button>
+                                    <!-- Modal -->
+                                    <!-- student edit form start
                                 ================================================== -->
-                                @include('components.dashboard.moderator-edit')
-                                <!-- student edit form end
+                                    @include('components.dashboard.moderator-edit')
+                                    <!-- student edit form end
                                 ================================================== -->
-                                <button type="button" class="me-3 confirm-text bg-transparent border-0"
-                                    wire:click="delete({{ $moderator->id }})">
-                                    <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img">
-                                </button>
+                                    <button type="button" class="me-3 confirm-text bg-transparent border-0"
+                                        wire:click="delete({{ $moderator->id }})">
+                                        <img src="{{ asset('assets') }}/img/icons/delete.svg" alt="img">
+                                    </button>
+                                    @if ($moderator->role == 'moderator')
+                                        <button type="button" class="me-3 confirm-text btn btn-sm btn-primary"
+                                            wire:click="makeAdmin({{ $moderator->id }})">
+                                            Make Admin
+                                        </button>
+                                    @else
+                                        <button type="button" class="me-3 confirm-text btn btn-sm btn-primary"
+                                            wire:click="makeModerator({{ $moderator->id }})">
+                                            Make Moderator
+                                        </button>
+                                    @endif
+                                @else
+                                    <span>Not Available right now</span>
+                                @endif
                             </td>
                         </tr>
                     @empty

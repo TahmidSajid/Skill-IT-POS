@@ -36,7 +36,7 @@ class ModeratorsList extends Component
     #[Computed]
     public function moderators()
     {
-        return User::where('role','moderator')->paginate(7);
+        return User::where('role','!=','student')->paginate(7);
     }
 
     public function edit($id){
@@ -81,5 +81,25 @@ class ModeratorsList extends Component
         };
         User::where('id',$id)->delete();
         notyf()->addError('Moderator deleted');
+    }
+
+    public function makeAdmin($id)
+    {
+        User::where('id',$id)->update([
+            'role' => 'admin'
+        ]);
+
+        notyf()->addSuccess('Role changed to admin');
+
+    }
+
+    public function makeModerator($id)
+    {
+        User::where('id',$id)->update([
+            'role' => 'moderator'
+        ]);
+
+        notyf()->addSuccess('Role changed to moderator');
+
     }
 }
