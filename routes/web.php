@@ -37,6 +37,8 @@ Route::get('/students', [App\Http\Controllers\StudentsController::class, 'view']
 Route::get('/enrollment', [App\Http\Controllers\EnrollmentsController::class, 'view'])->name('enroll');
 Route::get('/payments', [App\Http\Controllers\PaymentsController::class, 'view'])->name('payments');
 Route::get('/payments/individual/{courseId}/{studentId}', [App\Http\Controllers\IndividualPaymentController::class, 'view'])->name('individual_payment');
+Route::get('/expenses', [App\Http\Controllers\ExpensesController::class, 'view'])->name('expenses');
+
 
 
 

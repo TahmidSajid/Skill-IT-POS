@@ -161,6 +161,7 @@
                                     <ul>
                                         <li><a href="{{ route('caterory') }}">Category</a></li>
                                         <li><a href="{{ route('courses') }}">Course</a></li>
+                                        <li><a href="{{ route('expenses') }}">Expenses</a></li>
                                     </ul>
                                 </li>
                             @endif

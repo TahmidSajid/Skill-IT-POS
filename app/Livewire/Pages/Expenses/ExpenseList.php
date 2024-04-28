@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Livewire\Pages\Expenses;
+
+use App\Models\Expenses;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Validate;
+use App\Models\Courses;
+use Livewire\Attributes\On;
+use Carbon\Carbon;
+use Livewire\Component;
+
+class ExpenseList extends Component
+{
+    #[Validate('required')]
+    public $courseId,$expense,$date , $courseName;
+
+    public function render()
+    {
+        return view('livewire.pages.expenses.expense-list');
+    }
+
+    #[On('reloading')]
+    public function recheck()
+    {
+        unset($this->expenses);
+    }
+
+    #[Computed]
+    public function expenses()
+    {
+        return Expenses::all();
+    }
+
+    #[Computed]
+    public function courses()
+    {
+        return Courses::all();
+    }
+
+    public function delete($id)
+    {
+        Expenses::where('id',$id)->delete();
+        notyf()->addError('Expenses Deleted.');
+    }
+
+    public function edit($id)
+    {
+        $expenseInfo = Expenses::where('id',$id)->first();
+        $this->courseId = $expenseInfo->course_id;
+        $this->expense = $expenseInfo->expense;
+        $this->date = $expenseInfo->date;
+        $this->courseName = $expenseInfo->getCourse->course_name;
+    }
+
+    public function update($id)
+    {
+        Expenses::where('id',$id)->update([
+            'course_id' => $this->courseId,
+            'expense' => $this->expense,
+            'date' => $this->date,
+            'updated_at' => Carbon::now(),
+        ]);
+        notyf()->addSuccess('Expenses Updated.');
+    }
+
+}
