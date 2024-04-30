@@ -65,11 +65,23 @@
                     </div>
                     @if ($payment->status == 'unpaid')
                         <div class="dash-imgs">
-                            <form wire:submit="pay({{ $payment->id }})">
-                                <input type="month" wire:model="date">
+                            <!-- For Checking previous payment is paid or not
+                            ================================================== -->
+                            @if (App\Models\Payments::where('user_id', $payment->user_id)->where('course_id', $payment->course_id)->where('id', $payment->id - 1)->exists())
+                                @if (App\Models\Payments::where('user_id', $payment->user_id)->where('course_id', $payment->course_id)->where('id', $payment->id - 1)->first()->status == 'paid')
+                                    <form wire:submit="pay({{ $payment->id }})">
+                                        <input type="month" wire:model="date">
 
-                                <button class="btn btn-success" type="submit">Pay</button>
-                            </form>
+                                        <button class="btn btn-success" type="submit">Pay</button>
+                                    </form>
+                                @endif
+                            @else
+                                <form wire:submit="pay({{ $payment->id }})">
+                                    <input type="month" wire:model="date">
+
+                                    <button class="btn btn-success" type="submit">Pay</button>
+                                </form>
+                            @endif
                         </div>
                     @else
                         <h4>Paid</h4>

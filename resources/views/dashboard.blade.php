@@ -127,4 +127,5 @@
             </div>
         </div>
     </div>
+    <livewire:dashboard.monthly-expense>
 @endsection
