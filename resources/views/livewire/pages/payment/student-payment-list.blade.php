@@ -15,7 +15,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="">
                         <table class="table text-center">
                             <thead>
                                 <tr>
@@ -32,7 +32,7 @@
                                 @forelse ($this->students as $key => $student)
                                     <tr>
                                         <td class="d-flex align-items-center">
-                                            <div class="productimgname" wire:ignore>
+                                            <div class="productimgname">
                                                 @if ($student->getStudent->photo)
                                                     <img style="height: 50px; width:50px;" src="{{ asset('uploads/student_photos') }}/{{ $student->getStudent->photo }}"
                                                         alt="">
@@ -62,9 +62,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <button
-                                                            class="me-3 confirm-text btn btn-sm btn-danger text-white"
-                                                            wire:click="expel({{ $student->id }})">
+                                                        <button class="me-3 btn btn-sm btn-danger text-white" wire:click="expel({{ $student->id }})" wire:click="$refresh">
                                                             Expel
                                                         </button>
                                                     </div>
@@ -79,11 +77,6 @@
                                         </td>
                                     </tr>
                                 @endforelse
-                                <tr>
-                                    <td colspan="5">
-                                        {{-- {{ $this->categories->links() }} --}}
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

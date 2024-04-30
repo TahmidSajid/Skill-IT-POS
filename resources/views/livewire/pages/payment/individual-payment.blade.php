@@ -65,7 +65,11 @@
                     </div>
                     @if ($payment->status == 'unpaid')
                         <div class="dash-imgs">
-                            <button class="btn btn-success" wire:click="pay({{ $payment->id }})">Pay</button>
+                            <form wire:submit="pay({{ $payment->id }})">
+                                <input type="month" wire:model="date">
+
+                                <button class="btn btn-success" type="submit">Pay</button>
+                            </form>
                         </div>
                     @else
                         <h4>Paid</h4>

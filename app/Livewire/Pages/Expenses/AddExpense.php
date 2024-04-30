@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Expenses;
 
 use App\Models\Courses;
+use App\Models\Dates;
 use App\Models\Expenses;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
@@ -29,9 +30,16 @@ class AddExpense extends Component
     {
         $this->validate();
 
-        Expenses::insert([
+        $data = [
             'course_id' => $this->courseId,
             'expense' => $this->expense,
+            'date' => $this->date,
+        ];
+
+        $expense =  Expenses::create($data);
+
+        Dates::insert([
+            'expense_id' => $expense->id,
             'date' => $this->date,
             'created_at' => Carbon::now(),
         ]);

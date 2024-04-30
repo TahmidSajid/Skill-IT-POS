@@ -2,14 +2,17 @@
 
 namespace App\Livewire\Pages\Payment;
 
+use App\Models\Dates;
 use App\Models\Enrollments;
 use App\Models\Payments;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class IndividualPayment extends Component
 {
     public $student;
     public $course;
+    public $date;
 
     public function render()
     {
@@ -21,7 +24,15 @@ class IndividualPayment extends Component
     {
         Payments::where('id',$id)->update([
             'status' => 'paid',
+            'date' => $this->date,
         ]);
+
+        Dates::insert([
+            'date' => $this->date,
+            'payment_id' => $id,
+            'created_at' => Carbon::now(),
+        ]);
+
         if(!Payments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->where('status','unpaid')->exists()){
             Enrollments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->update([
                 'payment' => 'paid'

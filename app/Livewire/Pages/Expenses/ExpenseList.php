@@ -6,6 +6,7 @@ use App\Models\Expenses;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use App\Models\Courses;
+use App\Models\Dates;
 use Livewire\Attributes\On;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -41,6 +42,8 @@ class ExpenseList extends Component
     public function delete($id)
     {
         Expenses::where('id',$id)->delete();
+        Dates::where('expense_id',$id)->delete();
+
         notyf()->addError('Expenses Deleted.');
     }
 
@@ -61,6 +64,12 @@ class ExpenseList extends Component
             'date' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
+
+        Dates::where('expense_id',$id)->update([
+            'date' => $this->date,
+            'updated_at' => Carbon::now(),
+        ]);
+
         notyf()->addSuccess('Expenses Updated.');
     }
 
