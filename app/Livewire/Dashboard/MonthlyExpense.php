@@ -41,4 +41,35 @@ class MonthlyExpense extends Component
             return [];
         }
     }
+
+    #[Computed]
+    public function totalExpense()
+    {
+        if ($this->expenses != []) {
+            $total = 0;
+            foreach ($this->expenses as $key => $value) {
+                $total = $total + $value->expense;
+            }
+            return $total;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    #[Computed]
+    public function totalPayments()
+    {
+        if ($this->payments != []) {
+            $total = 0;
+            foreach ($this->payments as $key => $value) {
+                $total = $total + $value->payment;
+            }
+            return $total;
+        }
+        else {
+            return 0;
+        }
+    }
+
 }
