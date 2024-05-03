@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Intervention\Image\ImageManager;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class StudentProfile extends Component
@@ -52,7 +53,7 @@ class StudentProfile extends Component
     {
         $this->validate();
 
-        if(auth()->user()->photo){
+        if (auth()->user()->photo) {
             unlink('uploads/student_photos/' . auth()->user()->photo);
         }
 
@@ -68,4 +69,6 @@ class StudentProfile extends Component
 
         $this->dispatch('reload');
     }
+
+
 }

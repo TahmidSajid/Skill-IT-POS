@@ -3,7 +3,14 @@
     <div class="page-title">
         <h4>Student Profile</h4>
     </div>
-    <livewire:pages.student.student-profile>
+    <div class="container-xl px-4 mt-4">
+        <livewire:pages.student.student-profile>
+            <div class="row">
+                <div class="col-xl-8 offset-xl-4">
+                    <livewire:pages.student.password-change>
+                </div>
+            </div>
+    </div>
 @endsection
 @push('customeCss')
     <style type="text/css">

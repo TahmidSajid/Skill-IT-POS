@@ -140,7 +140,6 @@
                                         <td>{{ $payment->getStudent->name }}</td>
                                         <td>{{ $payment->payment }}</td>
                                         <td>{{ $payment->date }}</td>
-
                                     </tr>
                                 @empty
                                 @endforelse
