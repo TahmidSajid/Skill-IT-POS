@@ -24,6 +24,8 @@ class CategoryList extends Component
     public $categoryUpdateImage;
     public $imagePreview;
 
+    public $search;
+
     #[On('reloading')]
     public function reloading(){
         unset($this->categories);
@@ -32,7 +34,12 @@ class CategoryList extends Component
 
     #[Computed]
     public function categories(){
-        return Categories::paginate(5);
+        if ($this->search) {
+            return Categories::where('category_name','like','%'.$this->search.'%')->paginate(5);
+        }
+        else{
+            return Categories::paginate(5);
+        }
     }
 
 

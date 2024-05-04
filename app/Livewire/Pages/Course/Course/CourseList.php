@@ -27,6 +27,8 @@ class CourseList extends Component
     public $newCourseImage;
     public $newSubCategory = [];
 
+    public $search;
+
     #[On('reloading')]
     public function recheck()
     {
@@ -36,7 +38,12 @@ class CourseList extends Component
     #[Computed]
     public function courses()
     {
-        return Courses::paginate(5);
+        if ($this->search) {
+            return Courses::where('course_name','like','%'.$this->search.'%')->paginate(5);
+        }
+        else{
+            return Courses::paginate(5);
+        }
     }
     #[Computed]
     public function categories()

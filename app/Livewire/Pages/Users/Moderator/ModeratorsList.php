@@ -23,6 +23,8 @@ class ModeratorsList extends Component
     public $currentPhoto ;
     public $newPhoto ;
 
+    public $search;
+
     public function render()
     {
         return view('livewire.pages.users.moderator.moderators-list');
@@ -36,7 +38,12 @@ class ModeratorsList extends Component
     #[Computed]
     public function moderators()
     {
-        return User::where('role','!=','student')->paginate(7);
+        if ($this->search) {
+            return User::where('role','!=','student')->where('name','like','%'.$this->search.'%')->paginate(7);
+        }
+        else{
+            return User::where('role','!=','student')->paginate(7);
+        }
     }
 
     public function edit($id){

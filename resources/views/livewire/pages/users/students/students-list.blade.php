@@ -1,5 +1,19 @@
 <div class="card">
     <div class="card-body">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-8">
+                <div class="input-group mb-4">
+                    <input class="form-control border-end-0 border" type="search" wire:model.live="search"
+                        id="example-search-input" placeholder="search here....">
+                    <span class="input-group-append bg-transparent">
+                        <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
+                            type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table">
                 <thead>

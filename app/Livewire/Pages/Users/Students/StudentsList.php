@@ -23,6 +23,8 @@ class StudentsList extends Component
     public $currentPhoto ;
     public $newPhoto ;
 
+    public $search;
+
     #[On('reloading')]
     public function recheck(){
         unset($this->students);
@@ -30,7 +32,12 @@ class StudentsList extends Component
 
     #[Computed]
     public function students(){
-        return User::where('role','student')->paginate(5);
+        if ($this->search) {
+            return User::where('role','student')->where('name','like','%'.$this->search.'%')->paginate(5);
+        }
+        else{
+            return User::where('role','student')->paginate(5);
+        }
     }
 
     public function edit($id){
