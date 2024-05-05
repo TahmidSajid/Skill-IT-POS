@@ -16,13 +16,23 @@ class IndividualPayment extends Component
 
     public function render()
     {
-        $payments = Payments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->get();
-        $enrollments = Enrollments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->first();
-        return view('livewire.pages.payment.individual-payment',compact('enrollments','payments'));
+        $payments = Payments::where('user_id', $this->student->id)->where('course_id', $this->course->id)->get();
+        $enrollments = Enrollments::where('user_id', $this->student->id)->where('course_id', $this->course->id)->first();
+        return view('livewire.pages.payment.individual-payment', compact('enrollments', 'payments'));
     }
     public function pay($id)
     {
-        Payments::where('id',$id)->update([
+        /**
+         * Updates the payment status, date, and creates a new date record for the payment.
+         * If there are no more unpaid payments for the student and course, updates the enrollment payment status to 'paid'.
+         * Displays a success notification.
+         *
+         * @param int $id The ID of the payment to update.
+         * @param string $date The date of the payment.
+         * @param \App\Models\User $student The student associated with the payment.
+         * @param \App\Models\Course $course The course associated with the payment.
+         */
+        Payments::where('id', $id)->update([
             'status' => 'paid',
             'date' => $this->date,
         ]);
@@ -33,8 +43,8 @@ class IndividualPayment extends Component
             'created_at' => Carbon::now(),
         ]);
 
-        if(!Payments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->where('status','unpaid')->exists()){
-            Enrollments::where('user_id',$this->student->id)->where('course_id',$this->course->id)->update([
+        if (!Payments::where('user_id', $this->student->id)->where('course_id', $this->course->id)->where('status', 'unpaid')->exists()) {
+            Enrollments::where('user_id', $this->student->id)->where('course_id', $this->course->id)->update([
                 'payment' => 'paid'
             ]);
         };

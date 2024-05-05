@@ -28,7 +28,6 @@
     <div class="col-lg-12 col-sm-6 col-12">
         <div class="form-group mt-4 mb-2">
             <label>Sub Category</label>
-            @php  print_r($newSubCategory) @endphp
             <select class="form-select" multiple {{ !$categoryId ? 'disabled' : '' }} wire:model.live="newSubCategory"
                 aria-label="multiple select example">
                 <option class="mb-2">Choose Sub Category</option>

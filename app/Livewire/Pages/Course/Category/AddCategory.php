@@ -19,14 +19,20 @@ class AddCategory extends Component
     #[Validate('required')]
     public $categoryImage;
 
-    public function addCategory(){
+    public function addCategory()
+    {
+        /**
+         * Validates the input, creates a new category, and updates the category description if provided.
+         * Dispatches a 'reloading' event and displays a success notification.
+         * Resets the categoryName, categoryDescription, and categoryImage properties.
+         */
         $this->validate();
 
         $Image = new ImageManager(new Driver());
-        $new_name = Str::random(5).time().".".$this->categoryImage->getClientOriginalExtension();
-        $image = $Image->read($this->categoryImage)->resize(720,540);
-        $image->save(('uploads/category_photos/'.$new_name),quality: 30);
-        $tag = "#".str::slug($this->categoryName);
+        $new_name = Str::random(5) . time() . "." . $this->categoryImage->getClientOriginalExtension();
+        $image = $Image->read($this->categoryImage)->resize(720, 540);
+        $image->save(('uploads/category_photos/' . $new_name), quality: 30);
+        $tag = "#" . str::slug($this->categoryName);
 
         $data = [
             'category_name' => $this->categoryName,
@@ -36,13 +42,13 @@ class AddCategory extends Component
         $ctaegory_info = Categories::create($data);
 
         if ($this->categoryDescription) {
-            Categories::where('id',$ctaegory_info->id)->update([
+            Categories::where('id', $ctaegory_info->id)->update([
                 'category_description' => $this->categoryDescription,
             ]);
         };
         $this->dispatch('reloading');
         notyf()->addSuccess('Category added successfuly');
-        $this->reset('categoryName','categoryDescription','categoryImage');
+        $this->reset('categoryName', 'categoryDescription', 'categoryImage');
     }
 
     public function render()

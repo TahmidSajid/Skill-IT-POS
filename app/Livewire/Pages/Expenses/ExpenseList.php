@@ -14,7 +14,7 @@ use Livewire\Component;
 class ExpenseList extends Component
 {
     #[Validate('required')]
-    public $courseId,$expense,$date , $courseName;
+    public $courseId, $expense, $date, $courseName;
 
     public function render()
     {
@@ -41,15 +41,20 @@ class ExpenseList extends Component
 
     public function delete($id)
     {
-        Expenses::where('id',$id)->delete();
-        Dates::where('expense_id',$id)->delete();
+        Expenses::where('id', $id)->delete();
+        Dates::where('expense_id', $id)->delete();
 
         notyf()->addError('Expenses Deleted.');
     }
 
     public function edit($id)
     {
-        $expenseInfo = Expenses::where('id',$id)->first();
+        /**
+         * Retrieves the expense information for the given expense ID and populates the corresponding properties.
+         *
+         * @param int $id The ID of the expense to retrieve.
+         */
+        $expenseInfo = Expenses::where('id', $id)->first();
         $this->courseId = $expenseInfo->course_id;
         $this->expense = $expenseInfo->expense;
         $this->date = $expenseInfo->date;
@@ -58,19 +63,24 @@ class ExpenseList extends Component
 
     public function update($id)
     {
-        Expenses::where('id',$id)->update([
+        /**
+         * Updates the expense and related date records for the specified expense ID.
+         *
+         * @param int $id The ID of the expense to update.
+         * @return void
+         */
+        Expenses::where('id', $id)->update([
             'course_id' => $this->courseId,
             'expense' => $this->expense,
             'date' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
 
-        Dates::where('expense_id',$id)->update([
+        Dates::where('expense_id', $id)->update([
             'date' => $this->date,
             'updated_at' => Carbon::now(),
         ]);
 
         notyf()->addSuccess('Expenses Updated.');
     }
-
 }

@@ -13,7 +13,7 @@ use Livewire\Component;
 class AddExpense extends Component
 {
     #[Validate('required')]
-    public $courseId,$expense,$date;
+    public $courseId, $expense, $date;
 
     public function render()
     {
@@ -28,6 +28,11 @@ class AddExpense extends Component
 
     public function addExpenses()
     {
+        /**
+         * Validates the input data, creates a new expense record, and inserts a new date record associated with the expense.
+         *
+         * @return void
+         */
         $this->validate();
 
         $data = [
