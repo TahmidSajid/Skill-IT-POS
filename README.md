@@ -15,7 +15,7 @@ Skill-IT SME is a powerful and intuitive student management system designed to s
 ### Getting Started
 - Installation: Clone the repository and install dependencies using npm install.
 - Configuration: Configure the database connection and other settings as per your requirements.
-- Run the Application: Start the server using npm start and access the application through the provided URL.
+- Run the Application: Start the server using php artisan serve and access the application through the provided URL.
 
 ### Acknowledgements
 Special thanks to [livewire].
