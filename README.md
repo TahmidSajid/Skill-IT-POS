@@ -18,5 +18,4 @@ Skill-IT SME is a powerful and intuitive student management system designed to s
 - Run the Application: Start the server using php artisan serve and access the application through the provided URL.
 
 ### Acknowledgements
-Special thanks to [livewire].
-Inspired by the need for efficient student management systems in educational institutions.
+Special thanks to [Laravel,Livewire].
