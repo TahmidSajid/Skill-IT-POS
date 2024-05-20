@@ -13,9 +13,11 @@ Skill-IT SME is a powerful and intuitive student management system designed to s
 - Efficient User Experience: All operations are performed without page reloading, optimizing efficiency and usability.
 
 ### Getting Started
-- Installation: Clone the repository and install dependencies using `npm install`.
-- Configuration: Configure the database connection and other settings as per your requirements.
-- Run the Application: Start the server using `php artisan serve` and access the application through the provided URL.
+1. **Installation:** Clone the repository and install dependencies using `composer install`.
+2. **Configuration:** Set up the necessary configurations, including database connection and environment variables.
+3. **Migration:** To migrate the database run `php artisan migrate`.
+4. **Install npm:** Run `npm install` and `npm run dev`
+5. **Run the Application:** Start the server using `php artisan serve` and access the application through the provided URL.
 
 ### Acknowledgements
-Special thanks to [Laravel,Livewire].
+Special thanks to ##Laravel##,##Livewire##.
